@@ -1,24 +1,32 @@
-﻿using System.Text;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace ArchOp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logika interakcji dla klasy MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void NavToLogin(object sender, RoutedEventArgs e)
+        {
+            LoginPage loginPage = new();
+            loginPage.Show();
+
+            Close();
+        }
+        private void NavToRegister(object sender, RoutedEventArgs e)
+        {
+            RegisterPage registerPage = new();
+            registerPage.Show();
+            
+            Close();
         }
     }
 }

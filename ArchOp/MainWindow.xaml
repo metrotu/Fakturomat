@@ -7,6 +7,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="MainPage-PlaceHolder" FontWeight="Bold" FontSize="48" HorizontalAlignment="Center"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Content="Login" Width="200" Height="50"
+                    Background="#0078D7" Foreground="White" FontWeight="Bold" FontSize="20"
+                    HorizontalAlignment="Center" Click="NavToLogin"/>
+            <Button Grid.Row="1" Content="Register" Width="200" Height="50"
+                    Background="#0078D7" Foreground="White" FontWeight="Bold" FontSize="20"
+                    HorizontalAlignment="Center" Click="NavToRegister"/>
+        </Grid>
     </Grid>
 </Window>

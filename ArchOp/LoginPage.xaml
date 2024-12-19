@@ -1,0 +1,55 @@
+﻿<Window x:Class="ArchOp.LoginPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ArchOp"
+        xmlns:vm="clr-namespace:ArchOp.ViewModels"
+        mc:Ignorable="d"
+        Title="Login" Width="800" Height="600"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.DataContext>
+        <vm:LoginViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".5*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <!-- Title TextBlock -->
+        <TextBlock Grid.Row="0" Text="Login" FontWeight="Bold" FontSize="48"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+
+        <!-- Centered Form -->
+        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Email Field -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20">
+                <Label Content="Email:" FontWeight="Bold" FontSize="24" Width="200" VerticalAlignment="Center"/>
+                <TextBox Width="400" Height="40" FontSize="18" Text="{Binding Email}"/>
+            </StackPanel>
+
+            <!-- Password Field -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="20">
+                <Label Content="Password:" FontWeight="Bold" FontSize="24" Width="200" VerticalAlignment="Center"/>
+                <PasswordBox x:Name="PasswordBox" Width="400" Height="40" FontSize="18"/>
+            </StackPanel>
+
+            <!-- Login Button -->
+            <Button Grid.Row="4" Content="Login" Width="200" Height="50"
+                    Background="#0078D7" Foreground="White" FontWeight="Bold" FontSize="20"
+                    HorizontalAlignment="Center" Click="LoginButtonClick"/>
+        </Grid>
+    </Grid>
+</Window>
