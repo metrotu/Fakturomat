@@ -9,8 +9,7 @@ namespace ArchOp.ViewModels
     internal class RegisterViewModel
     {
         public string Email { get; set; }
-        public string Passowrd { get; set; }
-        public string ConfirmPassword { get; set; }
+
 
 
     }

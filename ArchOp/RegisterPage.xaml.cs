@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ArchOp.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Text.RegularExpressions;
+using ArchOp.Utils;
 
 namespace ArchOp
 {
@@ -23,10 +14,50 @@ namespace ArchOp
         public RegisterPage()
         {
             InitializeComponent();
+            DataContext = new RegisterViewModel();
         }
-        public void RegisterButtonClick(object sender, RoutedEventArgs e)
+        public async void RegisterButtonClick(object sender, RoutedEventArgs e)
         {
+            var email = ((RegisterViewModel)DataContext).Email;
+            var password = PasswordBox.Password;
+            var rePass = RePasswordBox.Password;
+
+            if (email == null)
+            {
+                MessageBox.Show("Please enter an email address.", "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (!RegexUtilities.IsValidEmail(email))
+            {
+                MessageBox.Show("Please enter a valid email address.", "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(rePass))
+            {
+                MessageBox.Show("Please enter both password and re-password.", "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (password != rePass)
+            {
+                MessageBox.Show("Passwords do not match.", "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (RegexUtilities.CheckPasswordStrength(password) == RegexUtilities.PasswordStrength.VeryWeak)
+            {
+                MessageBox.Show("Password is too weak.", "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            var supabse = await App.SupabaseClient.Auth.SignUp(email, password);
+            MessageBox.Show("Registration in progress, an email has been sent.", "Registration Success", MessageBoxButton.OK, MessageBoxImage.Information);
+
 
         }
+
+
     }
 }

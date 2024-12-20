@@ -43,10 +43,10 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <!-- Username Field -->
+            <!-- Email Field -->
             <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20">
                 <Label Content="Email:" FontWeight="Bold" FontSize="24" Width="200" VerticalAlignment="Center"/>
-                <TextBox x:Name="EmailTextBox" Width="400" Height="40" FontSize="24" />
+                <TextBox x:Name="EmailTextBox" Width="400" Height="40" FontSize="24" Text="{Binding Email}"/>
             </StackPanel>
 
             <!-- Password Field -->

@@ -22,7 +22,6 @@ namespace ArchOp
             var email = ((LoginViewModel)DataContext).Email;
             var password = PasswordBox.Password;
 
-            MessageBox.Show($"{email} {password}");
 
 
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
