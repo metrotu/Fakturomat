@@ -9,7 +9,7 @@ namespace ArchOp
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class LoginPage : Window
+    public partial class LoginPage : Window, LoginWindow
     {
         public LoginPage()
         {
@@ -40,6 +40,12 @@ namespace ArchOp
                 MessageBox.Show("Password and username don't match an existing user.");
             }
 
+        }
+        public void LoadHome()
+        {
+            HomePage home = new();
+            home.Show();
+            Close();
         }
     }
 }

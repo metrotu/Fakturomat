@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Windows;
+using static Supabase.Gotrue.Constants;
 
 namespace ArchOp
 {
@@ -25,10 +26,22 @@ namespace ArchOp
                 AutoConnectRealtime = true
             };
 
-            SupabaseClient = new Supabase.Client(url, key, options);
+            SupabaseClient = new Client(url, key, options);
             await SupabaseClient.InitializeAsync();
-        }
 
+            SupabaseClient.Auth.AddStateChangedListener((sender, changed) =>
+            {
+                if (sender.CurrentSession == null && changed == AuthState.SignedIn)
+                    LoadHome();
+
+            });
+        }
+        
+        private void LoadHome()
+        {
+            Current.Windows.OfType<LoginWindow>().FirstOrDefault()?.LoadHome();
+        }
+       
     }
 
 }
