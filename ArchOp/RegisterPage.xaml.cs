@@ -16,6 +16,8 @@ namespace ArchOp
             InitializeComponent();
             DataContext = new RegisterViewModel();
         }
+
+        //trzeba zrobic zeby przy rejestracji rowniez dodawalo do tablic uzytkownikow
         public async void RegisterButtonClick(object sender, RoutedEventArgs e)
         {
             var email = ((RegisterViewModel)DataContext).Email;
