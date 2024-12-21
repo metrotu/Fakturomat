@@ -16,19 +16,13 @@ using System.Windows.Shapes;
 namespace ArchOp
 {
     /// <summary>
-    /// Logika interakcji dla klasy HomePage.xaml
+    /// Interaction logic for InvoiceMakerPage.xaml
     /// </summary>
-    public partial class HomePage : Window
+    public partial class InvoiceMakerPage : Page
     {
-        public HomePage()
+        public InvoiceMakerPage()
         {
             InitializeComponent();
         }
-    
-        private void CreateInvoiceClick(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(new InvoiceMakerPage());
-        }
-    
     }
 }

@@ -33,7 +33,10 @@ namespace ArchOp
             {
                 var session = await App.SupabaseClient.Auth.SignIn(email, password);
                 if (session != null && session.User != null)
+                {
                     MessageBox.Show("LoginSucc");
+                    LoadHome();
+                }
             }
             catch (Exception _)
             {
