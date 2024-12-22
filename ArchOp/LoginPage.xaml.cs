@@ -9,8 +9,9 @@ namespace ArchOp
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class LoginPage : Window, LoginWindow
+    public partial class LoginPage : Window
     {
+
         public LoginPage()
         {
             InitializeComponent();
@@ -19,36 +20,15 @@ namespace ArchOp
         
         public async void LoginButtonClick(object sender, RoutedEventArgs e)
         {
-            var email = ((LoginViewModel)DataContext).Email;
             var password = PasswordBox.Password;
 
-
-
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            if (await ((LoginViewModel)DataContext).Login(password))
             {
-                MessageBox.Show("Please enter both username and password.", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
+                HomePage home = new();
+                home.Show();
+                Close();
             }
-            try
-            {
-                var session = await App.SupabaseClient.Auth.SignIn(email, password);
-                if (session != null && session.User != null)
-                {
-                    MessageBox.Show("LoginSucc");
-                    LoadHome();
-                }
-            }
-            catch (Exception _)
-            {
-                MessageBox.Show("Password and username don't match an existing user.");
-            }
-
         }
-        public void LoadHome()
-        {
-            HomePage home = new();
-            home.Show();
-            Close();
-        }
+       
     }
 }

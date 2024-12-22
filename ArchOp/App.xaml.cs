@@ -29,18 +29,8 @@ namespace ArchOp
             SupabaseClient = new Client(url, key, options);
             await SupabaseClient.InitializeAsync();
 
-            SupabaseClient.Auth.AddStateChangedListener((sender, changed) =>
-            {
-                if (sender.CurrentSession == null && changed == AuthState.SignedIn)
-                    LoadHome();
-
-            });
         }
         
-        private void LoadHome()
-        {
-            Current.Windows.OfType<LoginWindow>().FirstOrDefault()?.LoadHome();
-        }
        
     }
 

@@ -11,25 +11,41 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResize">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*" />
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="1*" />
-        </Grid.RowDefinitions>
+        <!-- Define Columns for Sidebar and Main Content -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <!-- Sidebar -->
+            <ColumnDefinition Width="*" />
+            <!-- Main Content -->
+        </Grid.ColumnDefinitions>
 
-        <!-- Welcome Text -->
-        <TextBox Grid.Row="0" Text="Welcome to ArchOp" 
-                 FontSize="24" VerticalAlignment="Center" 
-                 HorizontalAlignment="Center" 
-                 IsReadOnly="True" BorderThickness="0" />
+        <!-- Sidebar -->
+        <DockPanel Background="#F0F0F0" Grid.Column="0" VerticalAlignment="Stretch">
+            <StackPanel Margin="10">
+                <Button Content="Create Invoice" Height="40" Margin="0,5,0,5" Click="CreateInvoiceClick"/>
+                <Button Content="View Sent Invoices" Height="40" Margin="0,5,0,5" Click="ViewSentInvoicesClick"/>
+                <!-- Add more buttons as needed -->
+            </StackPanel>
+        </DockPanel>
 
-        <!-- Frame for Navigation -->
-        <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" />
+        <!-- Main Content -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
 
-        <!-- Redirect Button -->
-        <Button Grid.Row="2" Content="Create Invoice" 
-                Width="200" Height="50" 
-                VerticalAlignment="Center" HorizontalAlignment="Center" 
-                Click="CreateInvoiceClick" />
+            <!-- Welcome Text -->
+            <TextBox Grid.Row="0" Text="Welcome to ArchOp" 
+                     FontSize="24" VerticalAlignment="Center" 
+                     HorizontalAlignment="Center" 
+                     IsReadOnly="True" BorderThickness="0" />
+
+            <!-- Frame for Navigation -->
+            <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" />
+
+            <!-- Removed Button from Bottom -->
+        </Grid>
     </Grid>
 </Window>
