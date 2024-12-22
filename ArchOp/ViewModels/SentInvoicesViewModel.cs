@@ -1,32 +1,55 @@
 ﻿using ArchOp.Models;
-using Supabase.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace ArchOp.ViewModels
 {
-    public class SentInvoicesViewModel
+    internal class SentInvoicesViewModel
     {
+        public ObservableCollection<Invoice> Invoices { get; set; }
 
-        public SentInvoicesViewModel() { }
-
-        void GetSentInvoices()
+        public SentInvoicesViewModel()
         {
-            var user = App.SupabaseClient.Auth.CurrentUser.Id;
-            var invoices = Invoice.GetInvoicesAsync(user);
-
-
+            Invoices = new ObservableCollection<Invoice>();
+            LoadInvoicesAsync();
         }
 
+        private async void LoadInvoicesAsync()
+        {
 
+            var userId = App.SupabaseClient.Auth.CurrentUser.Id;
+            var fetchedInvoices = await Invoice.GetInvoicesAsync(userId);
+            foreach (var invoice in fetchedInvoices)
+            {
+                Invoices.Add(invoice);
+            }
+        
+        }
 
-
-
-
-
+        public static async void DownloadInvoiceCommand(Invoice invoice)
+        {
+            if (invoice != null)
+            {
+                string path = $"{invoice.InvoiceId}.pdf";
+                var f = File.Create(path);
+                try
+                {
+                    var bytes = await App.SupabaseClient.Storage.From("invoices").DownloadPublicFile($"invoicespdf/{invoice.InvoiceId}.pdf");
+                    f.Write(bytes, 0, bytes.Length);
+                }
+                catch(Exception e)
+                {
+                    throw e;
+                }
+                finally
+                {
+                    f.Close();   
+                }
+            }
+        }
 
     }
 }

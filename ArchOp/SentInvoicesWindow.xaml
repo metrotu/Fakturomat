@@ -9,9 +9,20 @@
     <Window.DataContext>
         <vm:SentInvoicesViewModel/>
     </Window.DataContext>
-
-
     <Grid>
+        <ListView ItemsSource="{Binding Invoices}" Margin="10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Invoice Name" Width="300">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                        <Button Content="{Binding InvoiceId}" Click="DownloadClick"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
     </Grid>
 

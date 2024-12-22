@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ArchOp.Models;
+using ArchOp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,13 @@ namespace ArchOp
         public SentInvoicesWindow()
         {
             InitializeComponent();
+        }
+
+        private async void DownloadClick(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            var invoice = await Invoice.GetInvoiceById(Convert.ToInt32(b.Content));
+            SentInvoicesViewModel.DownloadInvoiceCommand(invoice);
         }
     }
 }

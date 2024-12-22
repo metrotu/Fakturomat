@@ -35,7 +35,7 @@ namespace ArchOp.Models
                 .Where(x => x.UserId == userId)
                 .Get();
 
-            return (IEnumerable<Invoice>)response;
+            return response.Models;
         }
 
         public static async Task<Invoice> GetInvoiceById(int id)
