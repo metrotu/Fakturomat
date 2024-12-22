@@ -35,6 +35,13 @@ namespace ArchOp
 
             MainFrame.Navigate(new InvoiceMakerPage());
         }
+
+        private void ViewSentInvoicesClick(object sender, RoutedEventArgs e)
+        {
+            SentInvoicesWindow sentInvoicesWindow = new();
+            sentInvoicesWindow.Show();
+
+        }
     
     }
 }

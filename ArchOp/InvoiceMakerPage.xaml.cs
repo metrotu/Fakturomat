@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using ArchOp.Controllers;
 using ArchOp.Models;
 using iText.IO.Source;
 using iText.Kernel.Pdf;
@@ -26,7 +25,7 @@ namespace ArchOp
 
         private async void CreateInvoiceClick(object sender, RoutedEventArgs e)
         {
-            string pdfPath = $"{await InvoicesControllers.GetNewInvoiceId()}.pdf";
+            string pdfPath = $"{await Invoice.GetNewInvoiceId()}.pdf";
 
             await App.SupabaseClient.Storage.From("invoices").Upload(createPDF(), $"invoicespdf/{pdfPath}");
             await App.SupabaseClient.From<Invoice>().Insert(new Invoice 
