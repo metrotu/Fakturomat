@@ -4,10 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ArchOp"
+      xmlns:vm="clr-namespace:ArchOp.ViewModels"
+      
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="InvoiceMakerPage">
-
+    <Page.DataContext>
+        <vm:InvoiceMakerViewModel/>
+    </Page.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -21,12 +25,24 @@
         <TextBlock Grid.Row="0" Text="Invoice Maker Page" 
                    FontSize="34" 
                    HorizontalAlignment="Center" />
-        <TextBox x:Name="TextBox1" Grid.Row="1" Height="20" Width="200" HorizontalAlignment="Left" Margin="10"/>
-        <TextBox x:Name="TextBox2" Grid.Row="2" Height="20" Width="200" HorizontalAlignment="Left" Margin="10"/>
-        <TextBox x:Name="TextBox3" Grid.Row="3" Height="20" Width="200" HorizontalAlignment="Left" Margin="10"/>
-        <TextBox x:Name="TextBox4" Grid.Row="4" Height="20" Width="200" HorizontalAlignment="Left" Margin="10"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Label Content="Company name and address of customer"/>
+            <TextBox x:Name="NCompanyNameAddressCustomer" Height="20" Width="200" HorizontalAlignment="Left" Margin="10" Text="{Binding CompanyNameAddressCustomer}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <Label Content="Own company name and address"/>
+            <TextBox x:Name="NOwnCompanyNameAddress" Height="20" Width="200" HorizontalAlignment="Left" Margin="10" Text="{Binding OwnCompanyNameAddress}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <Label Content="Summary description"/>
+            <TextBox x:Name="NSummaryDescription" Height="20" Width="200" HorizontalAlignment="Left" Margin="10" Text="{Binding SummaryDescription}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="4">
+            <Label Content="Date of supply"/>
+            <TextBox x:Name="NDateOfSupply" Height="20" Width="200" HorizontalAlignment="Left" Margin="10" Text="{Binding DateOfSupply}"/>
+        </StackPanel>
         <Button Grid.Row="5" Height="60" HorizontalAlignment="Center"
-                Background="Blue" Content="Create Invoice" FontSize="24" Click="CreateInvoiceClick"/>
+                Background="Blue" Content="Send" FontSize="24" Click="SendInvoiceClick"/>
 
     </Grid>
 </Page>

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ArchOp.ViewModels
 {
@@ -48,7 +49,9 @@ namespace ArchOp.ViewModels
                 {
                     f.Close();   
                 }
+                MessageBox.Show("Invoice downloaded succesfully.");
             }
+            
         }
 
     }

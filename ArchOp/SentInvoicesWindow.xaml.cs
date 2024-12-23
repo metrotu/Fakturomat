@@ -31,6 +31,7 @@ namespace ArchOp
             Button b = (Button)sender;
             var invoice = await Invoice.GetInvoiceById(Convert.ToInt32(b.Content));
             SentInvoicesViewModel.DownloadInvoiceCommand(invoice);
+
         }
     }
 }

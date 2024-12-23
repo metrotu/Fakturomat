@@ -1,11 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using ArchOp.Models;
+using ArchOp.ViewModels;
 using iText.IO.Source;
 using iText.Kernel.Pdf;
 using iText.Layout;
-using iText.Layout.Element;
 
 
 namespace ArchOp
@@ -15,43 +14,20 @@ namespace ArchOp
     /// </summary>
     public partial class InvoiceMakerPage : Page
     {
-        List<TextBox> tBox;
         public InvoiceMakerPage()
         {
+            DataContext = new InvoiceMakerViewModel();
             InitializeComponent();
-            tBox = [TextBox1,TextBox2,TextBox3,TextBox4];
            
         }
 
-        private async void CreateInvoiceClick(object sender, RoutedEventArgs e)
+        private void SendInvoiceClick(object sender, RoutedEventArgs e)
         {
-            string pdfPath = $"{await Invoice.GetNewInvoiceId()}.pdf";
-
-            await App.SupabaseClient.Storage.From("invoices").Upload(createPDF(), $"invoicespdf/{pdfPath}");
-            await App.SupabaseClient.From<Invoice>().Insert(new Invoice 
-            { 
-                InvoiceId = Convert.ToInt32(pdfPath.Split(".")[0]),
-                UserId = App.SupabaseClient.Auth.CurrentUser.Id
-            });
-
+            ((InvoiceMakerViewModel)DataContext).SendInvoice();
 
         }
 
-        private byte[] createPDF()
-        {
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            PdfWriter writer = new PdfWriter(byteArrayOutputStream);
-            PdfDocument pdfDocument = new PdfDocument(writer);
-            Document document = new Document(pdfDocument);
-
-            //Write the file content
-            foreach (var textBox in tBox)
-            {
-                document.Add(new iText.Layout.Element.Paragraph(textBox.Text));
-            }
-            document.Close();
-            return byteArrayOutputStream.ToArray();
-        }
+        
 
     }
 }
