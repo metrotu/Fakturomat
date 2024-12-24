@@ -16,7 +16,6 @@ namespace ArchOp
     {
         public InvoiceMakerPage()
         {
-            DataContext = new InvoiceMakerViewModel();
             InitializeComponent();
            
         }
@@ -25,6 +24,11 @@ namespace ArchOp
         {
             ((InvoiceMakerViewModel)DataContext).SendInvoice();
 
+        }
+
+        private void AddItemClick(object sender, RoutedEventArgs e)
+        {
+            ((InvoiceMakerViewModel)DataContext).AddItem();
         }
 
         

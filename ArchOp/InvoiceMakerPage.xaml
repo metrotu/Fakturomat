@@ -20,7 +20,9 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Invoice Maker Page" 
                    FontSize="34" 
@@ -39,10 +41,42 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="4">
             <Label Content="Date of supply"/>
-            <TextBox x:Name="NDateOfSupply" Height="20" Width="200" HorizontalAlignment="Left" Margin="10" Text="{Binding DateOfSupply}"/>
+            <DatePicker x:Name="NDateOfSupply" Height="20" Width="200" HorizontalAlignment="Left" Margin="10" SelectedDate="{Binding DueDate}"/>
         </StackPanel>
-        <Button Grid.Row="5" Height="60" HorizontalAlignment="Center"
+
+        <StackPanel Grid.Row="5" Orientation="Vertical" Margin="10">
+            <TextBlock Text="Add Invoice Item" FontSize="20" Margin="0,10,0,5" />
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="Name" />
+                <TextBox Width="133" Text="{Binding ItemName}" Margin="5" />
+                <Label Content="Description" />
+                <TextBox Width="89" Text="{Binding ItemDescription}" Margin="5" />
+                <Label Content="Quantity" />
+                <TextBox Width="80" Text="{Binding Quantity}" Margin="5" />
+                <Label Content="Unit Price" />
+                <TextBox Width="100" Text="{Binding UnitPrice}" Margin="5" />
+                <Button Content="Add Item" Command="{Binding AddItemClick}" Width="100" />
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Invoice Items DataGrid -->
+        <DataGrid Grid.Row="7" ItemsSource="{Binding InvoiceItems}" AutoGenerateColumns="False" Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" />
+                <DataGridTextColumn Header="Unit Price" Binding="{Binding UnitPrice}" />
+                <DataGridTextColumn Header="Total Price" Binding="{Binding TotalPrice}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="8" Height="auto" HorizontalAlignment="Center"
                 Background="Blue" Content="Send" FontSize="24" Click="SendInvoiceClick"/>
 
+        
+        
+        
+        
+        
     </Grid>
 </Page>
