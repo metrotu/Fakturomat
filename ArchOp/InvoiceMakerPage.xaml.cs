@@ -16,15 +16,20 @@ namespace ArchOp
     {
         public InvoiceMakerPage()
         {
-            DataContext = new InvoiceMakerViewModel();
             InitializeComponent();
            
         }
 
-        private void SendInvoiceClick(object sender, RoutedEventArgs e)
+        private async void SendInvoiceClick(object sender, RoutedEventArgs e)
         {
-            ((InvoiceMakerViewModel)DataContext).SendInvoice();
+            ((Button)sender).IsEnabled = false;
+            ((Button)sender).IsEnabled = await ((InvoiceMakerViewModel)DataContext).SendInvoice();
 
+        }
+
+        private void AddItemClick(object sender, RoutedEventArgs e)
+        {
+            ((InvoiceMakerViewModel)DataContext).AddItem();
         }
 
         
