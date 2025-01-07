@@ -29,7 +29,7 @@ namespace ArchOp
         private async void DownloadClick(object sender, RoutedEventArgs e)
         {
             Button b = (Button)sender;
-            var invoice = await Invoice.GetInvoiceById(Convert.ToInt32(b.Content));
+            var invoice = await DBRequests.GetInvoiceById(Convert.ToInt32(b.Content));
             SentInvoicesViewModel.DownloadInvoiceCommand(invoice);
 
         }

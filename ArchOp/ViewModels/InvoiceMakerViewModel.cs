@@ -36,7 +36,7 @@ namespace ArchOp.ViewModels
 
         public async Task<bool> SendInvoice()
         {
-            string pdfPath = $"{await Invoice.GetNewInvoiceId()}.pdf";
+            string pdfPath = $"{await DBRequests.GetNewInvoiceId()}.pdf";
             System.Windows.MessageBox.Show("Invoice is being made.");
             
             var pdfData = await CreatePDF();
