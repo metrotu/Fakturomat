@@ -15,7 +15,7 @@ namespace ArchOp
         public LoginPage()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
+            //DataContext = new LoginViewModel();
         }
         
         public async void LoginButtonClick(object sender, RoutedEventArgs e)

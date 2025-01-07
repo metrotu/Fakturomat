@@ -20,7 +20,7 @@ namespace ArchOp.Models
                 .From<Invoice>() // Replace with your table model
                 .Select("InvoiceId")
                 .Order("InvoiceId", Supabase.Postgrest.Constants.Ordering.Descending)
-                .Range(0, 0)
+                .Range(0,0)
                 .Single(); // Fetch the single top row
 
             // Extract the InvoiceId and increment

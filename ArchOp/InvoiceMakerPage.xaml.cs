@@ -20,9 +20,10 @@ namespace ArchOp
            
         }
 
-        private void SendInvoiceClick(object sender, RoutedEventArgs e)
+        private async void SendInvoiceClick(object sender, RoutedEventArgs e)
         {
-            ((InvoiceMakerViewModel)DataContext).SendInvoice();
+            ((Button)sender).IsEnabled = false;
+            ((Button)sender).IsEnabled = await ((InvoiceMakerViewModel)DataContext).SendInvoice();
 
         }
 
