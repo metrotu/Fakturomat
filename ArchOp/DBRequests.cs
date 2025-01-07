@@ -120,7 +120,7 @@ namespace ArchOp
             if (user == null)
                 return;
 
-            var currUserAddedCompanies = user.UserAddedCompanies;
+            var currUserAddedCompanies = user.UserAddedCompaniesId;
 
             if (currUserAddedCompanies == null || currUserAddedCompanies.Length == 0)
             {
