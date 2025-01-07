@@ -58,8 +58,11 @@ namespace ArchOp
             var company = await GetCompanyByName(companyName);
             await App.SupabaseClient
                 .From<Users>()
-                .Insert(new Users { UserId = App.SupabaseClient.Auth.CurrentSession.User.Id,
-                    UserCompanyId = company.CompanyId, UserSupabaseId = App.SupabaseClient.Auth.CurrentSession.User.Id});
+                .Insert(new Users
+                {
+                    UserSupabaseId = App.SupabaseClient.Auth.CurrentSession.User.Id,
+                    UserCompanyId = company.CompanyId
+                });
         }
 
         public static async Task AddToUserAddedCompanies(string supabaseId, string companyId)
@@ -73,7 +76,7 @@ namespace ArchOp
             if (user == null)
                 return;
 
-            var currUserAddedCompanies = user.UserAddedCompanies;
+            var currUserAddedCompanies = user.UserAddedCompaniesId;
 
             if (currUserAddedCompanies == null || currUserAddedCompanies.Length == 0)
             {
@@ -87,7 +90,7 @@ namespace ArchOp
             await App.SupabaseClient
                .From<Users>()
                .Where(x => x.UserSupabaseId == supabaseId)
-               .Set(x => x.UserAddedCompanies, currUserAddedCompanies)
+               .Set(x => x.UserAddedCompaniesId, currUserAddedCompanies)
                .Update();
         }
 
