@@ -24,6 +24,42 @@ namespace ArchOp
             return response != null ? response.InvoiceId + 1 : 0;
         }
 
+        public static async Task<IEnumerable<int>?> GetUserAddedCompaniesIdAsync()
+        {
+            var h = await App.SupabaseClient
+                .From<Users>()
+                .Select("UserAddedCompaniesId")
+                .Where(x => x.SupabaseUserId == App.SupabaseClient.Auth.CurrentUser.Id)
+                .Single();
+            if (h == null || h.UserAddedCompaniesId == null || h.UserAddedCompaniesId.Length==0)
+                return null;
+
+            return h.UserAddedCompaniesId.Split(',').Select(x => Convert.ToInt32(x));
+        }
+
+
+        //Retrieve all companies that the user has added, CompanyName and CompanyAddress are exposed,
+        //but you can expose more fields if needed
+        public static async Task<IEnumerable<Company>?> GetUserAddedCompaniesAsync()
+        {
+            var h = await GetUserAddedCompaniesIdAsync();
+            if (h == null)
+            {
+                return null;
+            }
+            List<Company> companies = [];
+            foreach (var companyId in h)
+            {
+                var res = await GetCompanyById(companyId);
+                if (res != null)
+                {
+                    companies.Add(res);
+                }
+            }
+
+            return companies;
+        }
+
         public static async Task<IEnumerable<Invoice>> GetInvoicesAsync(string userId)
         {
             var response = await App.SupabaseClient
@@ -45,29 +81,40 @@ namespace ArchOp
             return response;
         }
 
-        public static async Task AddCompany(string companyName, string companyAddress)
+        public static async Task<Company> AddCompany(string companyName, string companyAddress)
         {
             await App.SupabaseClient
                 .From<Company>()
                 .Insert(new Company { CompanyName = companyName, CompanyAddress = companyAddress});
+            return await App.SupabaseClient
+                .From<Company>()
+                .Select("CompanyId")
+                .Where(x => x.CompanyName == companyName)
+                .Single();
         }
 
 
-        public static async Task PairUserCompanyWithUser(string companyName)
+
+        public static async Task PairUserCompanyWithUser(string companyName, string companyAddress)
         {
             var company = await GetCompanyByName(companyName);
+            if (company == null)
+            {
+                company = await AddCompany(companyName, companyAddress);
+            }
+            string userId = App.SupabaseClient.Auth.CurrentSession.User.Id;
+            var h = new Users { SupabaseUserId = userId, UserCompanyId = company.CompanyId, UserAddedCompaniesId = "" };
             await App.SupabaseClient
                 .From<Users>()
-                .Insert(new Users { UserId = App.SupabaseClient.Auth.CurrentSession.User.Id,
-                    UserCompanyId = company.CompanyId, UserSupabaseId = App.SupabaseClient.Auth.CurrentSession.User.Id});
+                .Insert(h);
         }
 
-        public static async Task AddToUserAddedCompanies(string supabaseId, string companyId)
+        public static async Task AddToUserAddedCompanies(string companyId)
         {
             Users? user = await App.SupabaseClient
                 .From<Users>()
-                .Select("UserSupabaseId")
-                .Where(x => x.UserSupabaseId == supabaseId)
+                .Select("SupabaseUserId, UserAddedCompaniesId")
+                .Where(x => x.SupabaseUserId == App.SupabaseClient.Auth.CurrentUser.Id)
                 .Single();
             
             if (user == null)
@@ -81,13 +128,13 @@ namespace ArchOp
             }
             else
             {
-                currUserAddedCompanies = $",{companyId}";
+                currUserAddedCompanies = $"{currUserAddedCompanies},{companyId}";
             }
 
             await App.SupabaseClient
                .From<Users>()
-               .Where(x => x.UserSupabaseId == supabaseId)
-               .Set(x => x.UserAddedCompanies, currUserAddedCompanies)
+               .Where(x => x.SupabaseUserId == user.SupabaseUserId)
+               .Set(x => x.UserAddedCompaniesId, currUserAddedCompanies)
                .Update();
         }
 
@@ -104,9 +151,23 @@ namespace ArchOp
         {
             return await App.SupabaseClient
                 .From<Company>()
-                .Select("CompanyId")
+                .Select("CompanyName, CompanyAddress") 
                 .Where(x => x.CompanyId == companyId)
                 .Single();
+        }
+
+        public static async Task<bool> AlreadyAddedToUserCompanies(string companyName)
+        {
+            var h = await GetUserAddedCompaniesAsync();
+            return h != null && h.Any(x => x.CompanyName == companyName);
+        }
+
+        public static async Task<bool> IsUserAlreadyPaired()
+        {
+            return (await App.SupabaseClient
+                .From<Users>()
+                .Select("UserCompanyId")
+                .Get()).Models.Count != 0;
         }
 
     }

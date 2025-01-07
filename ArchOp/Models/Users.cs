@@ -6,15 +6,20 @@ namespace ArchOp.Models
     [Table("Users")]
     internal class Users : BaseModel
     {
-        [PrimaryKey("UserId")]
-        public string UserId { get; set; }
+        //[PrimaryKey("UserId")]
+        // public string UserId { get; set; }
+
+        [PrimaryKey("UserRowId")]
+        public int UserRowId { get; set; }
+
+        [Column("SupabaseUserId")]
+        public string SupabaseUserId { get; set; }
 
         [Column("UserCompanyId")]
-        public int UserCompanyId { get; set; }
+        public int? UserCompanyId { get; set; }
 
         [Column("UserAddedCompanies")]
-        public string? UserAddedCompanies { get; set; }
-        [Column("UserSupabaseId")]
-        public string UserSupabaseId { get; set; }
+        public string? UserAddedCompaniesId { get; set; }
+ 
     }
 }

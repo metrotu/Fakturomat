@@ -47,6 +47,10 @@ namespace ArchOp
         {
             MainFrame.Navigate(new SetCompanyPage());
         }
-    
+        private void AddCompanyClick(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new AddCompanyPage());
+        }
+
     }
 }
