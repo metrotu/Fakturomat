@@ -47,7 +47,7 @@ namespace ArchOp.ViewModels
                 return false;
             }
 
-            var supabase = await App.SupabaseClient.Auth.SignUp(Email, password);
+            await App.SupabaseClient.Auth.SignUp(Email, password);
             MessageBox.Show("Registration in progress, an email has been sent.", "Registration Success", MessageBoxButton.OK, MessageBoxImage.Information);
             return true;
         }
