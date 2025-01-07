@@ -42,6 +42,11 @@ namespace ArchOp
             sentInvoicesWindow.Show();
 
         }
+
+        private void SetCompanyClick(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new SetCompanyPage());
+        }
     
     }
 }

@@ -24,6 +24,7 @@
             <StackPanel Margin="10">
                 <Button Content="Create Invoice" Height="40" Margin="0,5,0,5" Click="CreateInvoiceClick"/>
                 <Button Content="View Sent Invoices" Height="40" Margin="0,5,0,5" Click="ViewSentInvoicesClick"/>
+                <Button Content="Set Company" Height="40" Margin="0,5,0,5" Click="SetCompanyClick"/>
                 <!-- Add more buttons as needed -->
             </StackPanel>
         </DockPanel>
