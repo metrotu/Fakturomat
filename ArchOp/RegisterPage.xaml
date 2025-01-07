@@ -19,52 +19,61 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height=".5*" />
-            <RowDefinition Height="4*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="53*" />
+            <RowDefinition Height="530*" />
+            <RowDefinition Height="0*" />
         </Grid.RowDefinitions>
 
+        <!-- Back Button -->
+        <Button Content="Back" 
+                Width="100" 
+                Height="40" 
+                FontSize="16"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Margin="10"
+                Click="BackButtonClick"/>
+
         <!-- Title TextBlock -->
-        <TextBlock Grid.Row="0" Text="PlaceHolder-Login" FontWeight="Bold" FontSize="48"
-                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+        <TextBlock Text="Fakturomat Register" FontWeight="Bold" FontSize="48" TextAlignment="Center"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Height="63" Width="500" />
 
         <!-- Centered Form -->
-        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="486" Width="660">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="40" />
-                <!-- Spacer -->
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="40" />
+                <!-- Spacer -->
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="60" />
                 <!-- Spacer -->
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="60" />
-                <!-- Spacer -->
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <!-- Email Field -->
-            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20">
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20,20,20,20">
                 <Label Content="Email:" FontWeight="Bold" FontSize="24" Width="200" VerticalAlignment="Center"/>
                 <TextBox x:Name="EmailTextBox" Width="400" Height="40" FontSize="24" Text="{Binding Email}"/>
             </StackPanel>
-
             <!-- Password Field -->
-            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="20">
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="20,20,20,20">
                 <Label Content="Password:" FontWeight="Bold" FontSize="24" Width="200" VerticalAlignment="Center"/>
                 <PasswordBox x:Name="PasswordBox" Width="400" Height="40" FontSize="24" PasswordChar="*"/>
             </StackPanel>
 
             <!-- Password Field -->
-            <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="20">
+            <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="20,20,20,20">
                 <Label Content="Re-Passowrd:" FontWeight="Bold" FontSize="24" Width="200" VerticalAlignment="Center"/>
                 <PasswordBox x:Name="RePasswordBox" Width="400" Height="40" FontSize="24" PasswordChar="*"/>
             </StackPanel>
 
             <!-- Login Button -->
-            <Button Grid.Row="5" Content="Login" Width="200" Height="50"
+            <Button Grid.Row="5" Content="Register" Width="200"
                     Background="#0078D7" Foreground="White" FontWeight="Bold" FontSize="20"
-                    HorizontalAlignment="Center" Click="RegisterButtonClick"/>
+                    HorizontalAlignment="Center" Click="RegisterButtonClick" Margin="0,5,0,5"/>
         </Grid>
     </Grid>
 </Window>

@@ -15,41 +15,53 @@ namespace ArchOp.ViewModels
 
         public RegisterViewModel() { }
 
-        public async Task<bool> Register(string password, string rePass)
+        public async Task<int> Register(string password, string rePass)
         {
+            List<string> massage = [];
+            int sum = 0;
             if (Email == null)
             {
-                MessageBox.Show("Please enter an email address.", "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
+                massage.Add("Please enter an email address. \n");
+                //MessageBox.Show("Please enter an email address.", "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+                sum += 1;
             }
-
-            if (!RegexUtilities.IsValidEmail(Email))
+            else if (!RegexUtilities.IsValidEmail(Email))
             {
-                MessageBox.Show("Please enter a valid email address.", "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
+                massage.Add("Please enter a valid email address. \n");
+                //MessageBox.Show("Please enter a valid email address.", "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+                sum += 1;
+
             }
 
             if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(rePass))
             {
-                MessageBox.Show("Please enter both password and re-password.", "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
+                massage.Add("Please enter both password and re-password. \n");
+                //MessageBox.Show("Please enter both password and re-password.", "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+                sum += 5;
             }
-
-            if (password != rePass)
+            else if (password != rePass)
             {
-                MessageBox.Show("Passwords do not match.", "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
+                massage.Add("Passwords do not match. \n");
+                //MessageBox.Show("Passwords do not match.", "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+                sum += 5;
             }
-
-            if (RegexUtilities.CheckPasswordStrength(password) == RegexUtilities.PasswordStrength.VeryWeak)
+            else if (RegexUtilities.CheckPasswordStrength(password) == RegexUtilities.PasswordStrength.VeryWeak)
             {
-                MessageBox.Show("Password is too weak.", "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
+                massage.Add("Password is too weak. \n");
+                //MessageBox.Show("Password is too weak.", "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+                sum += 5;
 
+            }
+            if (sum > 0) {
+                string s = "";
+                massage.ForEach(x => s += x);
+                s += sum;
+                MessageBox.Show(s, "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return sum;
+            }
             await App.SupabaseClient.Auth.SignUp(Email, password);
             MessageBox.Show("Registration in progress, an email has been sent.", "Registration Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            return true;
+            return 0;
         }
 
 
