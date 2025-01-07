@@ -95,7 +95,7 @@ namespace ArchOp
         {
             return await App.SupabaseClient
                 .From<Company>()
-                .Select("CompanyName")
+                .Select("CompanyId")
                 .Where(x => x.CompanyName == companyName)
                 .Single();
         }
