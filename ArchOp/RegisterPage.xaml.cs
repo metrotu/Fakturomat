@@ -25,8 +25,8 @@ namespace ArchOp
             if (await ((RegisterViewModel)DataContext).Register(password, rePass))
             {
 
-                HomePage home = new();
-                home.Show();
+                MainWindow mainWindow = new();
+                mainWindow.Show();
                 Close();
 
             }
