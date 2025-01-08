@@ -9,13 +9,16 @@ namespace ArchOp.Models
         //[PrimaryKey("UserId")]
         // public string UserId { get; set; }
 
-        [PrimaryKey("UserSupabaseId")]
-        public string UserSupabaseId { get; set; }
+        [PrimaryKey("UserRowId")]
+        public int UserRowId { get; set; }
+
+        [Column("SupabaseUserId")]
+        public string SupabaseUserId { get; set; }
 
         [Column("UserCompanyId")]
-        public int UserCompanyId { get; set; }
+        public int? UserCompanyId { get; set; }
 
-        [Column("UserAddedCompanies")]
+        [Column("UserAddedCompaniesId")]
         public string? UserAddedCompaniesId { get; set; }
  
     }

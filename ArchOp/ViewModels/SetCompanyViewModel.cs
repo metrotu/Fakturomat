@@ -12,9 +12,12 @@ namespace ArchOp.ViewModels
         public async void SetUserCompany()
         {
             // add some logic?
-           if(await DBRequests.GetCompanyByName(CompanyName) == null)
-                await DBRequests.AddCompany(CompanyName, CompanyAddress);
-            await DBRequests.PairUserCompanyWithUser(CompanyName);
+            if (await DBRequests.IsUserAlreadyPaired())
+            {
+                System.Windows.MessageBox.Show("Company already set, unable to change contact the administrator");
+                return;
+            }
+            await DBRequests.PairUserCompanyWithUser(CompanyName,CompanyAddress);
         }
 
     }
