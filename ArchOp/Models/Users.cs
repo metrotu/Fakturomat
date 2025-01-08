@@ -18,7 +18,7 @@ namespace ArchOp.Models
         [Column("UserCompanyId")]
         public int? UserCompanyId { get; set; }
 
-        [Column("UserAddedCompanies")]
+        [Column("UserAddedCompaniesId")]
         public string? UserAddedCompaniesId { get; set; }
  
     }

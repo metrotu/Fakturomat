@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using ArchOp.Models;
 
 namespace ArchOp
@@ -26,21 +27,24 @@ namespace ArchOp
 
         public static async Task<IEnumerable<int>?> GetUserAddedCompaniesIdAsync()
         {
-            var h = await App.SupabaseClient
-                .From<Users>()
-                .Select("UserAddedCompaniesId")
-                .Where(x => x.SupabaseUserId == App.SupabaseClient.Auth.CurrentUser.Id)
-                .Single();
-            if (h == null || h.UserAddedCompaniesId == null || h.UserAddedCompaniesId.Length==0)
-                return null;
 
+            var h = await App.SupabaseClient
+              .From<Users>()
+              .Select("UserAddedCompaniesId, SupabaseUserId")
+              .Where(x => x.SupabaseUserId == App.SupabaseClient.Auth.CurrentUser.Id)
+              .Single();
+
+            if (h == null || h.UserAddedCompaniesId == null || h.UserAddedCompaniesId.Length == 0)
+                return null;
+        
             return h.UserAddedCompaniesId.Split(',').Select(x => Convert.ToInt32(x));
+        
         }
 
 
         //Retrieve all companies that the user has added, CompanyName and CompanyAddress are exposed,
         //but you can expose more fields if needed
-        public static async Task<IEnumerable<Company>?> GetUserAddedCompaniesAsync()
+        public static async Task<List<Company?>> GetUserAddedCompaniesAsync()
         {
             var h = await GetUserAddedCompaniesIdAsync();
             if (h == null)
@@ -59,6 +63,8 @@ namespace ArchOp
 
             return companies;
         }
+
+
 
         public static async Task<IEnumerable<Invoice>> GetInvoicesAsync(string userId)
         {

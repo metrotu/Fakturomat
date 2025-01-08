@@ -8,6 +8,7 @@ using iText.Layout.Borders;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
+using System.Reactive.Linq;
 
 namespace ArchOp.ViewModels
 {
@@ -27,9 +28,14 @@ namespace ArchOp.ViewModels
         public double Price { get; set; }
         public double TotalPrice { get => Quantity * Price; }
 
+        public ObservableCollection<Company?> UserCompanies { get; set; }
+        public string SelectedCompany { get; set; }
+
         public InvoiceMakerViewModel()
         {
             InvoiceItems = [];
+            UserCompanies = [];
+            LoadUserCompaniesAsync();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -138,8 +144,13 @@ namespace ArchOp.ViewModels
                 System.Windows.MessageBox.Show("Invalid data types for item.", "Warning");
             }
         }
+        public async Task LoadUserCompaniesAsync()
+        {
 
-      
+            UserCompanies = new(await DBRequests.GetUserAddedCompaniesAsync());
+            OnPropertyChanged(nameof(UserCompanies));
+        }
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
