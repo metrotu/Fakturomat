@@ -113,6 +113,7 @@ namespace ArchOp
             await App.SupabaseClient
                 .From<Users>()
                 .Insert(h);
+
         }
 
         public static async Task AddToUserAddedCompanies(string companyId)
