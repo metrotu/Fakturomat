@@ -148,11 +148,12 @@ namespace ArchOp
         {
             return await App.SupabaseClient
                 .From<Company>()
-                .Select("CompanyId")
+                .Select("CompanyId, CompanyName, CompanyAddress")
                 .Where(x => x.CompanyName == companyName)
                 .Single();
         }
 
+        //here we can chose what to expose from a company
         public static async Task<Company?> GetCompanyById(int companyId)
         {
             return await App.SupabaseClient
@@ -174,6 +175,18 @@ namespace ArchOp
                 .From<Users>()
                 .Select("UserCompanyId")
                 .Get()).Models.Count != 0;
+        }
+
+        public static async Task<Company> GetOwnCompany()
+        {
+            var id = (await App.SupabaseClient
+                .From<Users>()
+                .Select("UserCompanyId")
+                .Where(x => x.SupabaseUserId == App.SupabaseClient.Auth.CurrentUser.Id)
+                .Single()).UserCompanyId;
+            
+            return await GetCompanyById(id.Value);
+
         }
 
     }
