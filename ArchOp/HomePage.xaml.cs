@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArchOp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,6 +42,14 @@ namespace ArchOp
             SentInvoicesWindow sentInvoicesWindow = new();
             sentInvoicesWindow.Show();
 
+        }
+
+        private void LogOutClick(object sender, RoutedEventArgs e)
+        {
+            ((HomePageViewModel)DataContext).LogOut();
+            MainWindow mainWindow = new();
+            mainWindow.Show();
+            Close();
         }
 
         private void SetCompanyClick(object sender, RoutedEventArgs e)
