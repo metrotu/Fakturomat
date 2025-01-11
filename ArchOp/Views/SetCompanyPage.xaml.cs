@@ -21,9 +21,10 @@ namespace ArchOp
     /// </summary>
     public partial class SetCompanyPage : UserControl
     {
-        public SetCompanyPage()
+        public SetCompanyPage(NavStore navStore)
         {
             InitializeComponent();
+            DataContext = new SetCompanyViewModel(navStore);
         }
 
         public void SetUserCompanyClick(object sender, RoutedEventArgs e)
