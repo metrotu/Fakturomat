@@ -59,7 +59,7 @@
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
                     FontSize="14" 
-                    Click="AddUserCompanyClick"/>
+                    Command="{Binding AddCompanyCommand}"/>
         </Grid>
     </Grid>
 </UserControl>

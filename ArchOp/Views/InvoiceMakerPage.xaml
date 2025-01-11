@@ -5,9 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ArchOp"
       xmlns:vm="clr-namespace:ArchOp.ViewModels"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800">
-    
+      mc:Ignorable="d" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -55,7 +53,7 @@
                 <TextBox Width="80" Text="{Binding Quantity}" Margin="5" />
                 <Label Content="Unit Price" />
                 <TextBox Width="100" Text="{Binding Price}" Margin="5" />
-                <Button Content="Add Item" Click="AddItemClick" Width="100" />
+                <Button Content="Add Item" Command="{Binding AddItemCommand}" Width="100" />
             </StackPanel>
         </StackPanel>
 
@@ -71,6 +69,6 @@
         </DataGrid>
 
         <Button Grid.Row="8" Height="auto" HorizontalAlignment="Center"
-                Background="Blue" Content="Send" FontSize="24" Click="SendInvoiceClick"/>
+                Background="Green" Content="Create" FontSize="24" IsEnabled="{Binding IsCreateInvoiceEnabled}" Command="{Binding CreateInvoiceCommand}"/>
     </Grid>
 </UserControl>

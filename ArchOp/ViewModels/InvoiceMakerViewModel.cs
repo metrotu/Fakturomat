@@ -9,6 +9,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using System.Reactive.Linq;
+using CommunityToolkit.Mvvm.Input;
+using System.Windows.Input;
 
 namespace ArchOp.ViewModels
 {
@@ -34,6 +36,14 @@ namespace ArchOp.ViewModels
 
         public Company OwnCompany { get; set; }
 
+        private RelayCommand addItemCommand;
+        public ICommand AddItemCommand => addItemCommand ??= new RelayCommand(AddItemButton);
+
+        private RelayCommand createInvoiceCommand;
+        public ICommand CreateInvoiceCommand => createInvoiceCommand ??= new RelayCommand(CreateInvoiceButton);
+
+        public bool IsCreateInvoiceEnabled { get; set; }
+
         public InvoiceMakerViewModel(NavStore navStore)
         {
             this.navStore = navStore;
@@ -42,13 +52,14 @@ namespace ArchOp.ViewModels
             LoadUserCompaniesAsync();
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         public async Task<bool> SendInvoice()
         {
             string pdfPath = $"{await DBRequests.GetNewInvoiceId()}.pdf";
             System.Windows.MessageBox.Show("Invoice is being made.");
             
+            IsCreateInvoiceEnabled = false;
+            OnPropertyChanged(nameof(IsCreateInvoiceEnabled));
+
             var pdfData = await CreatePDF();
 
             await App.SupabaseClient.Storage.From("invoices").Upload(pdfData, $"invoicespdf/{pdfPath}");
@@ -59,6 +70,10 @@ namespace ArchOp.ViewModels
             });
 
             System.Windows.MessageBox.Show("Invoice has been sent.");
+            
+            IsCreateInvoiceEnabled = true;
+            OnPropertyChanged(nameof(IsCreateInvoiceEnabled));
+
             return true;
         }
 
@@ -156,6 +171,8 @@ namespace ArchOp.ViewModels
             return byteArrayOutputStream.ToArray();
         }
 
+
+
         public void AddItem()
         {
             try
@@ -168,6 +185,7 @@ namespace ArchOp.ViewModels
                 System.Windows.MessageBox.Show("Invalid data types for item.", "Warning");
             }
         }
+
         public async Task LoadUserCompaniesAsync()
         {
 
@@ -178,11 +196,19 @@ namespace ArchOp.ViewModels
         public async Task LoadOwnCompanyAsync()
         {
             OwnCompany = await DBRequests.GetOwnCompany();
+            OnPropertyChanged(nameof(OwnCompany));
         }
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private async void CreateInvoiceButton()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            await SendInvoice();
         }
+
+        private async void AddItemButton()
+        {
+            AddItem();
+        }
+
+
     }
 }

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ArchOp.ViewModels
 {
@@ -13,6 +15,8 @@ namespace ArchOp.ViewModels
         public string CompanyName { get; set; }
         public string CompanyAddress { get; set; }
 
+        private RelayCommand addCompanyCommand;
+        public ICommand AddCompanyCommand => addCompanyCommand ??= new RelayCommand(AddCompanyButton);
 
         public AddCompanyViewModel(NavStore navStore)
         {
@@ -21,7 +25,7 @@ namespace ArchOp.ViewModels
         }
 
         public async void AddToUserAddedCompanies()
-        { 
+        {
 
             if (!await DBRequests.AlreadyAddedToUserCompanies(CompanyName))
             {
@@ -47,9 +51,12 @@ namespace ArchOp.ViewModels
                 }
             }
 
-            }
+        }
 
-
-
+        private async void AddCompanyButton()
+        {
+            AddToUserAddedCompanies();
+            navStore.CurrentViewModel = new HomePageViewModel(navStore);
+        }
     }
 }

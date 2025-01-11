@@ -1,10 +1,15 @@
 ﻿using ArchOp.Models;
+using CommunityToolkit.Mvvm.Input;
+using System.Windows.Input;
 
 namespace ArchOp.ViewModels
 {
     internal class SetCompanyViewModel : ViewModelBase
     {
         private readonly NavStore navStore;
+
+        private RelayCommand setCompanyCommand;
+        public ICommand SetCompanyCommand => setCompanyCommand ??= new RelayCommand(SetCompanyButton);
 
         public string CompanyName { get; set; }
         public string CompanyAddress {  get; set; }
@@ -23,6 +28,12 @@ namespace ArchOp.ViewModels
                 return;
             }
             await DBRequests.PairUserCompanyWithUser(CompanyName,CompanyAddress);
+        }
+
+        private async void SetCompanyButton()
+        {
+            SetUserCompany();
+            navStore.CurrentViewModel = new HomePageViewModel(navStore);
         }
 
     }
