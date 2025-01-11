@@ -175,6 +175,7 @@ namespace ArchOp
             return (await App.SupabaseClient
                 .From<Users>()
                 .Select("UserCompanyId")
+                .Where(x => x.SupabaseUserId == App.SupabaseClient.Auth.CurrentUser.Id)
                 .Get()).Models.Count != 0;
         }
 
