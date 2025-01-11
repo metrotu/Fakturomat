@@ -24,16 +24,7 @@
             <RowDefinition Height="0*" />
         </Grid.RowDefinitions>
 
-        <!-- Back Button -->
-        <Button Content="Back" 
-                Width="100" 
-                Height="40" 
-                FontSize="16"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Margin="10"
-                Click="BackButtonClick"/>
-
+        
         <!-- Title TextBlock -->
         <TextBlock Text="Fakturomat Register" FontWeight="Bold" FontSize="48" TextAlignment="Center"
                    HorizontalAlignment="Center" VerticalAlignment="Center" Height="63" Width="500" />
@@ -42,14 +33,12 @@
         <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="486" Width="660">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="20" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="20" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="40" />
-                <!-- Spacer -->
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="60" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="50" />
                 <!-- Spacer -->
             </Grid.RowDefinitions>
 
@@ -71,9 +60,15 @@
             </StackPanel>
 
             <!-- Login Button -->
-            <Button Grid.Row="5" Content="Register" Width="200"
+            <Button Grid.Row="6" Content="Register" Width="200"
                     Background="#0078D7" Foreground="White" FontWeight="Bold" FontSize="20"
-                    HorizontalAlignment="Center" Click="RegisterButtonClick" Margin="0,5,0,5"/>
+                    HorizontalAlignment="Center" Click="RegisterButtonClick" Margin="250,5,0,5"/>
+            <!-- Back Button -->
+            <Button Grid.Row="6" Content="Back"  Width="200"
+                    Background="#0078D7" Foreground="White" FontWeight="Bold" FontSize="20"
+                    HorizontalAlignment="Center"  Margin="0,5,250,5"
+                    Click="BackButtonClick"/>
+
         </Grid>
     </Grid>
 </Window>
