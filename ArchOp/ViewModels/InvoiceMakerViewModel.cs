@@ -48,6 +48,9 @@ namespace ArchOp.ViewModels
         {
             this.navStore = navStore;
             InvoiceItems = [];
+            IsCreateInvoiceEnabled = true;
+            OnPropertyChanged(nameof(IsCreateInvoiceEnabled));
+
             LoadOwnCompanyAsync();
             LoadUserCompaniesAsync();
         }

@@ -14,9 +14,10 @@ namespace ArchOp
     /// </summary>
     public partial class InvoiceMakerPage : Page
     {
-        public InvoiceMakerPage()
+        public InvoiceMakerPage(NavStore navStore)
         {
             InitializeComponent();
+            DataContext = new InvoiceMakerViewModel(navStore);
         }
 
         private async void SendInvoiceClick(object sender, RoutedEventArgs e)

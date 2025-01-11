@@ -33,7 +33,7 @@ namespace ArchOp.ViewModels
         }
         private void ExecuteNavToInvoice()
         {
-            CurrentPage = new InvoiceMakerPage();
+            CurrentPage = new InvoiceMakerPage(navStore);
             OnPropertyChanged(nameof(CurrentPage));
         }
         private void ExecuteNavToSentInvoice()
