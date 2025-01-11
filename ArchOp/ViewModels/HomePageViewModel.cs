@@ -21,6 +21,7 @@ namespace ArchOp.ViewModels
         public ICommand NavToAddCompanyCommand { get; }
         public ICommand LogOutCommand { get; }
 
+
         public HomePageViewModel(NavStore navStore)
         {
             this.navStore = navStore;
@@ -33,6 +34,7 @@ namespace ArchOp.ViewModels
         private void ExecuteNavToInvoice()
         {
             CurrentPage = new InvoiceMakerPage();
+            OnPropertyChanged(nameof(CurrentPage));
         }
         private void ExecuteNavToSentInvoice()
         {
