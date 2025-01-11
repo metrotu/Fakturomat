@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace ArchOp.ViewModels
@@ -11,6 +12,9 @@ namespace ArchOp.ViewModels
     internal class HomePageViewModel : ViewModelBase
     {
         private readonly NavStore navStore;
+        
+        public Page CurrentPage { get; set; }
+
         public ICommand NavToInvoiceMakerCommand { get; }
         public ICommand NavToSentInvoiceCommand { get; }
         public ICommand NavToSetCompanyCommand { get; }
@@ -28,15 +32,13 @@ namespace ArchOp.ViewModels
         }
         private void ExecuteNavToInvoice()
         {
-            navStore.CurrentViewModel = new InvoiceMakerViewModel(navStore);
+            CurrentPage = new InvoiceMakerPage();
         }
         private void ExecuteNavToSentInvoice()
         {
-            navStore.CurrentViewModel = new SentInvoicesViewModel(navStore);
         }
         private void ExecuteNavToSetCompany()
         {
-            navStore.CurrentViewModel = new SetCompanyViewModel(navStore);
         }
         private void ExecuteLogOut()
         {
@@ -45,7 +47,6 @@ namespace ArchOp.ViewModels
         }
         private void ExecuteNavToAddCompany()
         {
-            navStore.CurrentViewModel = new AddCompanyViewModel(navStore);
         }
     }
 }

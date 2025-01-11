@@ -26,15 +26,7 @@ namespace ArchOp
             InitializeComponent();
         }
     
-        private void CreateInvoiceClick(object sender, RoutedEventArgs e)
-        {
-            //???? czy tak sie powinno robic
-            //((Button)sender).IsEnabled = false;
-            //((Button)sender).Visibility = Visibility.Hidden;
-            //???
-
-            MainFrame.Navigate(new InvoiceMakerPage());
-        }
+        
 
         /*private void LogOutClick(object sender, RoutedEventArgs e)
         {
@@ -44,14 +36,6 @@ namespace ArchOp
             Close();
         }*/
 
-        private void SetCompanyClick(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(new SetCompanyPage());
-        }
-        private void AddCompanyClick(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(new AddCompanyPage());
-        }
 
     }
 }

@@ -61,6 +61,7 @@ namespace ArchOp.ViewModels
         {
             if (await Login(password))
             {
+                var mainFrame = Application.Current.MainWindow.FindName("MainFrame") as Frame;
                 navStore.CurrentViewModel = new HomePageViewModel(navStore);
             }
 

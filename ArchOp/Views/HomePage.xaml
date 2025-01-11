@@ -63,7 +63,7 @@
                      IsReadOnly="True" BorderThickness="0" />
 
             <!-- Frame for Navigation -->
-            <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" />
+            <Frame Content="{Binding CurrentPage}" Grid.Row="1" NavigationUIVisibility="Hidden" />
 
             <!-- Removed Button from Bottom -->
         </Grid>
