@@ -2,15 +2,17 @@
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows;
-using System.Reflection.Metadata.Ecma335;
+using System.Windows.Input;
 
 namespace ArchOp.ViewModels
 {
-    public class LoginViewModel
+    public class LoginViewModel : ViewModelBase
     {
 
         public string Email { get; set; }
         private readonly string password;
+
+
         public LoginViewModel() { }
         public LoginViewModel(string password)
         {

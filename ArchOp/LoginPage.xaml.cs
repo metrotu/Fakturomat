@@ -9,13 +9,13 @@ namespace ArchOp
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class LoginPage : Window
+    public partial class LoginPage : UserControl
     {
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new();
             mainWindow.Show();
-            Close();
+            //Close();
         }
 
         public LoginPage()
@@ -32,7 +32,7 @@ namespace ArchOp
             {
                 HomePage home = new();
                 home.Show();
-                Close();
+                //Close();
             }
         }
        

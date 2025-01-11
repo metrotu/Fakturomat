@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArchOp.ViewModels;
+using System;
 using System.Windows;
 
 
@@ -14,19 +15,6 @@ namespace ArchOp
             InitializeComponent();
         }
 
-        private void NavToLogin(object sender, RoutedEventArgs e)
-        {
-            LoginPage loginPage = new();
-            loginPage.Show();
-
-            Close();
-        }
-        private void NavToRegister(object sender, RoutedEventArgs e)
-        {
-            RegisterPage registerPage = new();
-            registerPage.Show();
-            
-            Close();
-        }
+        
     }
 }

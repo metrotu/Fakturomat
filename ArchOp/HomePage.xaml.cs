@@ -25,7 +25,6 @@ namespace ArchOp
             InitializeComponent();
         }
     
-
         private void CreateInvoiceClick(object sender, RoutedEventArgs e)
         {
             //???? czy tak sie powinno robic

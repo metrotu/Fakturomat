@@ -11,29 +11,35 @@ namespace ArchOp
     /// <summary>
     /// Logika interakcji dla klasy RegisterPage.xaml
     /// </summary>
-    public partial class RegisterPage : Window
+    public partial class RegisterPage : UserControl
     {
         public RegisterPage()
         {
             InitializeComponent();
         }
 
+
         private void BackButtonClick(object sender, RoutedEventArgs e)
         {
-
             MainWindow mainWindow = new();
             mainWindow.Show();
-            Close();
+            //Close();
         }
 
         //trzeba zrobic zeby przy rejestracji rowniez dodawalo do tablic uzytkownikow
         public async void RegisterButtonClick(object sender, RoutedEventArgs e)
         {
-            var email = ((RegisterViewModel)DataContext).Email;
             var password = PasswordBox.Password;
             var rePass = RePasswordBox.Password;
             int registrationResult = await ((RegisterViewModel)DataContext).Register(password, rePass);
-            switch (registrationResult)
+            ShowcaseWrongInputs(registrationResult);
+            
+           
+        }
+        
+        private async void ShowcaseWrongInputs(int registrationRes)
+        {
+            switch (registrationRes)
             {
                 case 1:
                     EmailTextBox.Background = Brushes.Salmon;
@@ -62,13 +68,10 @@ namespace ArchOp
                 case 0:
                     MainWindow mainWindow = new();
                     mainWindow.Show();
-                    Close();
+                    //Close();
                     break;
             }
-            
-           
         }
-        
 
     }
 }

@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace ArchOp.ViewModels
 {
-    public class RegisterViewModel
+    public class RegisterViewModel : ViewModelBase
     {
         public string Email { get; set; }
 
@@ -63,6 +63,8 @@ namespace ArchOp.ViewModels
             MessageBox.Show("Registration in progress, an email has been sent.", "Registration Success", MessageBoxButton.OK, MessageBoxImage.Information);
             return 0;
         }
+
+
 
 
     }
