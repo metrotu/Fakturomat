@@ -18,25 +18,6 @@ namespace ArchOp
             InitializeComponent();
         }
 
-
-        private void BackButtonClick(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = new();
-            mainWindow.Show();
-            //Close();
-        }
-
-        //trzeba zrobic zeby przy rejestracji rowniez dodawalo do tablic uzytkownikow
-        public async void RegisterButtonClick(object sender, RoutedEventArgs e)
-        {
-            var password = PasswordBox.Password;
-            var rePass = RePasswordBox.Password;
-            int registrationResult = await ((RegisterViewModel)DataContext).Register(password, rePass);
-            ShowcaseWrongInputs(registrationResult);
-            
-           
-        }
-        
         private async void ShowcaseWrongInputs(int registrationRes)
         {
             switch (registrationRes)
@@ -73,5 +54,14 @@ namespace ArchOp
             }
         }
 
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            ((RegisterViewModel)DataContext).Password = PasswordBox.Password;
+        }
+
+        private void RePasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            ((RegisterViewModel)DataContext).RePass = RePasswordBox.Password;
+        }
     }
 }

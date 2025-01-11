@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
+using CommunityToolkit.Mvvm.Input;
+using System.Windows.Input;
 
 namespace ArchOp.ViewModels
 {
@@ -13,13 +15,27 @@ namespace ArchOp.ViewModels
     {
         private readonly NavStore navStore;
         public string Email { get; set; }
+        private string password;
+        public string Password { get=>password; set=>password = value; }
+        
+        private string rePass;
+        public string RePass { get=>rePass; set=>rePass = value;}
+
+        private RelayCommand registerCommand;
+        public ICommand RegisterCommand => registerCommand ??= new RelayCommand(RegisterButton);
+
+
+        private RelayCommand backCommand;
+        public ICommand BackCommand => registerCommand ??= new RelayCommand(BackButton);
+
+
 
         public RegisterViewModel(NavStore navStore) 
         {
             this.navStore = navStore;
         }
 
-        public async Task<int> Register(string password, string rePass)
+        public async Task<int> Register()
         {
             List<string> massage = [];
             int sum = 0;
@@ -68,6 +84,17 @@ namespace ArchOp.ViewModels
             return 0;
         }
 
+        private async void RegisterButton()
+        {
+            var _ = await Register();
+            //nav to dashboard upon registration submition
+            navStore.CurrentViewModel = new DashboardViewModel(navStore);
+        }
+
+        private async void BackButton()
+        {
+            navStore.CurrentViewModel = new DashboardViewModel(navStore);
+        }
 
 
 
