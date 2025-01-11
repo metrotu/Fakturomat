@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace ArchOp.ViewModels
 {
-    internal class AddCompanyViewModel
+    internal class AddCompanyViewModel : ViewModelBase
     {
+        private readonly NavStore navStore;
+
         public string CompanyName { get; set; }
         public string CompanyAddress { get; set; }
 
 
-        public AddCompanyViewModel()
+        public AddCompanyViewModel(NavStore navStore)
         {
+            this.navStore = navStore;
 
         }
 

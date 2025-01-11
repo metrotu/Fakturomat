@@ -5,12 +5,15 @@ using System.Windows;
 
 namespace ArchOp.ViewModels
 {
-    internal class SentInvoicesViewModel
+    internal class SentInvoicesViewModel : ViewModelBase
     {
+        private readonly NavStore navStore;
+
         public ObservableCollection<Invoice> Invoices { get; set; }
 
-        public SentInvoicesViewModel()
+        public SentInvoicesViewModel(NavStore navStore)
         {
+            this.navStore = navStore;
             Invoices = new ObservableCollection<Invoice>();
             LoadInvoicesAsync();
         }

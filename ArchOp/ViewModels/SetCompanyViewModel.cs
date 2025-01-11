@@ -2,11 +2,16 @@
 
 namespace ArchOp.ViewModels
 {
-    internal class SetCompanyViewModel
+    internal class SetCompanyViewModel : ViewModelBase
     {
+        private readonly NavStore navStore;
+
         public string CompanyName { get; set; }
         public string CompanyAddress {  get; set; }
-        public SetCompanyViewModel() { }
+        public SetCompanyViewModel(NavStore navStore)
+        {
+            this.navStore = navStore;
+        }
 
 
         public async void SetUserCompany()

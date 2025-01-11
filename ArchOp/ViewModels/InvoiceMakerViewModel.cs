@@ -12,8 +12,9 @@ using System.Reactive.Linq;
 
 namespace ArchOp.ViewModels
 {
-    internal class InvoiceMakerViewModel : INotifyPropertyChanged
+    internal class InvoiceMakerViewModel : ViewModelBase
     {
+        private readonly NavStore navStore;
         public string CompanyNameAddressCustomer { get; set; }
         public string OwnCompanyNameAddress { get; set; }
         public string SummaryDescription { get; set; }
@@ -33,8 +34,9 @@ namespace ArchOp.ViewModels
 
         public Company OwnCompany { get; set; }
 
-        public InvoiceMakerViewModel()
+        public InvoiceMakerViewModel(NavStore navStore)
         {
+            this.navStore = navStore;
             InvoiceItems = [];
             LoadOwnCompanyAsync();
             LoadUserCompaniesAsync();
