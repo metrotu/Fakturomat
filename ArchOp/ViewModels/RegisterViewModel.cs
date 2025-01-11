@@ -8,12 +8,17 @@ using System.Windows.Controls;
 using System.Windows;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
+using iText.Layout.Properties;
+using System.Windows.Media;
 
 namespace ArchOp.ViewModels
 {
     public class RegisterViewModel : ViewModelBase
     {
         private readonly NavStore navStore;
+        public Brush Color1 { get; set; }
+        public Brush Color2 { get; set; }
+        public Brush Color3 { get; set; }
         public string Email { get; set; }
         private string password;
         public string Password { get=>password; set=>password = value; }
@@ -75,8 +80,31 @@ namespace ArchOp.ViewModels
             if (sum > 0) {
                 string s = "";
                 massage.ForEach(x => s += x);
-                s += sum;
                 MessageBox.Show(s, "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+
+                switch (sum)
+                {
+                    case 1:
+                        Color1 = Brushes.Salmon;
+                        Color2 = Brushes.White;
+                        Color3 = Brushes.White;
+                        break;
+                    case 5:
+                        Color1 = Brushes.White;
+                        Color2 = Brushes.Salmon;
+                        Color3 = Brushes.Salmon;
+                        break;
+                    case 6:
+                        Color1 = Brushes.Salmon;
+                        Color2 = Brushes.Salmon;
+                        Color3 = Brushes.Salmon;
+                        break;
+
+                }
+                OnPropertyChanged(nameof(Color1));
+                OnPropertyChanged(nameof(Color2));
+                OnPropertyChanged(nameof(Color3));
                 return sum;
             }
             await App.SupabaseClient.Auth.SignUp(Email, password);
@@ -84,11 +112,17 @@ namespace ArchOp.ViewModels
             return 0;
         }
 
+
+
         private async void RegisterButton()
         {
-            var _ = await Register();
-            //nav to dashboard upon registration submition
-            navStore.CurrentViewModel = new DashboardViewModel(navStore);
+            var registerResult = await Register();
+            if (registerResult == 0)
+            {
+                //nav to dashboard upon registration submition
+                navStore.CurrentViewModel = new DashboardViewModel(navStore);
+            }
+            
         }
 
         private async void BackButton()
