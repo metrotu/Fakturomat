@@ -70,7 +70,7 @@ namespace ArchOp
         {
             var response = await App.SupabaseClient
                 .From<Invoice>()
-                .Select("InvoiceId")
+                .Select("InvoiceId,InvoiceYear")
                 .Where(x => x.UserId == userId)
                 .Get();
 
@@ -81,7 +81,7 @@ namespace ArchOp
         {
             var response = await App.SupabaseClient
                 .From<Invoice>()
-                .Select("InvoiceId")
+                .Select("InvoiceId,InvoiceYear")
                 .Where(x => x.UserId == App.SupabaseClient.Auth.CurrentUser.Id && x.InvoiceId == id)
                 .Single();
             return response;

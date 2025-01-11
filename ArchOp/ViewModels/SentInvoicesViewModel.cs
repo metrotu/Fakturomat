@@ -34,11 +34,11 @@ namespace ArchOp.ViewModels
         {
             if (invoice != null)
             {
-                string path = $"{invoice.InvoiceId}.pdf";
+                string path = $"{invoice.InvoiceId}_{invoice.InvoiceYear}.pdf";
                 var f = File.Create(path);
                 try
                 {
-                    var bytes = await App.SupabaseClient.Storage.From("invoices").DownloadPublicFile($"invoicespdf/{invoice.InvoiceId}.pdf");
+                    var bytes = await App.SupabaseClient.Storage.From("invoices").DownloadPublicFile($"{invoice.InvoiceId}_{invoice.InvoiceYear}.pdf");
                     f.Write(bytes, 0, bytes.Length);
                 }
                 catch(Exception e)

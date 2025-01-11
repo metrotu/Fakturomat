@@ -19,11 +19,12 @@ namespace ArchOp
     /// <summary>
     /// Logika interakcji dla klasy SentInvoicesWindow.xaml
     /// </summary>
-    public partial class SentInvoicesWindow : UserControl
+    public partial class SentInvoicesWindow : Page
     {
-        public SentInvoicesWindow()
+        public SentInvoicesWindow(NavStore navStore)
         {
             InitializeComponent();
+            DataContext = new SentInvoicesViewModel(navStore);
         }
 
         private async void DownloadClick(object sender, RoutedEventArgs e)

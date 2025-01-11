@@ -49,6 +49,9 @@ namespace ArchOp.ViewModels
             this.navStore = navStore;
             InvoiceItems = [];
             IsCreateInvoiceEnabled = true;
+
+            DueDate = DateTime.Now;
+
             OnPropertyChanged(nameof(IsCreateInvoiceEnabled));
 
             LoadOwnCompanyAsync();
@@ -57,19 +60,20 @@ namespace ArchOp.ViewModels
 
         public async Task<bool> SendInvoice()
         {
-            string pdfPath = $"{await DBRequests.GetNewInvoiceId()}.pdf";
-            System.Windows.MessageBox.Show("Invoice is being made.");
-            
             IsCreateInvoiceEnabled = false;
             OnPropertyChanged(nameof(IsCreateInvoiceEnabled));
-
-            var pdfData = await CreatePDF();
-
-            await App.SupabaseClient.Storage.From("invoices").Upload(pdfData, $"invoicespdf/{pdfPath}");
+            int invoiceId;
+            string pdfPath = $"{invoiceId = await DBRequests.GetNewInvoiceId()}_{InvoiceDate.Year}.pdf";
+            System.Windows.MessageBox.Show("Invoice is being made.");
+            
+            var pdfData = await CreatePDF(invoiceId);
+                                                                                            //id_rok.pdf
+            await App.SupabaseClient.Storage.From("invoices").Upload(pdfData, $"{pdfPath}");
             await App.SupabaseClient.From<Invoice>().Insert(new Invoice
             {
-                InvoiceId = Convert.ToInt32(pdfPath.Split(".")[0]),
-                UserId = App.SupabaseClient.Auth.CurrentUser.Id
+                InvoiceId = Convert.ToInt32(pdfPath.Split("_")[0]),
+                UserId = App.SupabaseClient.Auth.CurrentUser.Id,
+                InvoiceYear = InvoiceDate.Year.ToString()
             });
 
             System.Windows.MessageBox.Show("Invoice has been sent.");
@@ -80,7 +84,7 @@ namespace ArchOp.ViewModels
             return true;
         }
 
-        private async Task<byte[]> CreatePDF()
+        private async Task<byte[]> CreatePDF(int invoiceId)
         {
             //maybe need better protection???
             if (OwnCompany == null)
@@ -117,7 +121,7 @@ namespace ArchOp.ViewModels
             // Adding company and customer details
             Table detailsTable = new Table(2).UseAllAvailableWidth();
             detailsTable.AddCell(new Cell().Add(new Paragraph($"{oName} \n {oAddress}")).SetBorder(Border.NO_BORDER));
-            detailsTable.AddCell(new Cell().Add(new Paragraph($"Invoice # 123456\nInvoice Date: {InvoiceDate:MM/dd/yyyy}\nDue Date: {DueDate:MM/dd/yyyy}"))
+            detailsTable.AddCell(new Cell().Add(new Paragraph($"Invoice # {invoiceId}\nInvoice Date: {InvoiceDate:MM/dd/yyyy}\nDue Date: {DueDate:MM/dd/yyyy}"))
                 .SetTextAlignment(TextAlignment.RIGHT).SetBorder(Border.NO_BORDER));
 
             detailsTable.AddCell(new Cell().Add(new Paragraph($"{cName} \n {cAddress}")).SetMarginTop(20).SetBorder(Border.NO_BORDER));

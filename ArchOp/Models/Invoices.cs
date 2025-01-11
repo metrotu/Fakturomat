@@ -10,6 +10,8 @@ namespace ArchOp.Models
         public int InvoiceId { get; set; }
         [Column("UserId")]
         public string UserId { get; set; }
+        [Column("InvoiceYear")]
+        public string? InvoiceYear { get; set; }
     
     }
 
