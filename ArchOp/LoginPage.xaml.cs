@@ -11,6 +11,12 @@ namespace ArchOp
     /// </summary>
     public partial class LoginPage : Window
     {
+        private void BackButtonClick(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new();
+            mainWindow.Show();
+            Close();
+        }
 
         public LoginPage()
         {
