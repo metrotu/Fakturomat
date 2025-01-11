@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace ArchOp.ViewModels
 {
-    class HomePageViewModel
+    internal class HomePageViewModel : ViewModelBase
     {
-        public HomePageViewModel() { }
-        public async void LogOut()
+        private readonly NavStore navStore;
+        public HomePageViewModel(NavStore navStore)
         {
-            await App.SupabaseClient.Auth.SignOut();
-
+            this.navStore = navStore;
         }
     }
 }

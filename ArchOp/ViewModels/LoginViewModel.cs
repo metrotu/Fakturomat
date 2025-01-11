@@ -1,18 +1,25 @@
-﻿using System.ComponentModel;
+﻿using CommunityToolkit.Mvvm.Input;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows;
-using System.Reflection.Metadata.Ecma335;
+using System.Windows.Input;
 
 namespace ArchOp.ViewModels
 {
-    public class LoginViewModel
+    public class LoginViewModel : ViewModelBase
     {
-
+        private readonly NavStore navStore;
         public string Email { get; set; }
-        private readonly string password;
-        public LoginViewModel() { }
-        public LoginViewModel(string password)
+        private string password;
+        public string Password { get=>password; set=>password = value; }
+
+
+        public LoginViewModel(NavStore navStore) 
+        {
+            this.navStore = navStore;
+        }
+        public LoginViewModel(NavStore navStore, string password) : this(navStore)
         {
             this.password = password;
         }
@@ -40,6 +47,23 @@ namespace ArchOp.ViewModels
             return true;
         }
 
+        private RelayCommand loginButtonCommand;
+        public ICommand LoginButtonCommand => loginButtonCommand ??= new RelayCommand(LoginButton);
 
+        private RelayCommand backButtonCommand;
+        public ICommand BackButtonCommand => backButtonCommand ??= new RelayCommand(BackButton);
+
+        private void BackButton()
+        {
+            navStore.CurrentViewModel = new DashboardViewModel(navStore);
+        }
+        private async void LoginButton()
+        {
+            if (await Login(password))
+            {
+                navStore.CurrentViewModel = new HomePageViewModel(navStore);
+            }
+
+        }
     }
 }

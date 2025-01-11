@@ -1,19 +1,10 @@
-﻿<Window x:Class="ArchOp.HomePage"
+﻿<UserControl x:Class="ArchOp.HomePage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArchOp"
-        xmlns:vm="clr-namespace:ArchOp.ViewModels"
-        mc:Ignorable="d"
-        Title="Home" 
-        Width="800"
-        Height="600"
-        WindowStartupLocation="CenterScreen"
-        ResizeMode="CanResize">
-    <Window.DataContext>
-        <vm:HomePageViewModel/>
-    </Window.DataContext>
+        mc:Ignorable="d">
     <Grid>
         <!-- Define Columns for Sidebar and Main Content -->
         <Grid.ColumnDefinitions>
@@ -45,15 +36,17 @@
                     <RowDefinition Height="60" />
                     <RowDefinition Height="10" />
                 </Grid.RowDefinitions>
-
                 <Button Grid.Row="1" Content="Create Invoice" FontSize="15" Height="40" Margin="20,5,20,5" Click="CreateInvoiceClick"/>
                 <Button Grid.Row="3" Content="View Sent Invoices" Height="40" FontSize="15" Margin="20,5,20,5" Click="ViewSentInvoicesClick"/>
-                <Button Grid.Row="5" Content="Set Company" Height="40" FontSize="15" Margin="20,5,20,5" Click="SetCompanyClick"/>
-                <Button Grid.Row="7" Content="Add Company" Height="40" FontSize="15" Margin="20,5,20,5" Click="AddCompanyClick"/>
+                <Button Grid.Row="5" Content="View Sent Invoices" Height="40" FontSize="15" Margin="20,5,20,5" Click="ViewSentInvoicesClick"/>
+                <Button Grid.Row="7" Content="Set Company" Height="40" FontSize="15" Margin="20,5,20,5" Click="SetCompanyClick"/>
+                <Button Grid.Row="9" Content="Add Company" Height="40" FontSize="15" Margin="20,5,20,5" Click="AddCompanyClick"/>
+                
                 <Button Grid.Row="15" Content="Log out" FontWeight="Bold" FontSize="26" Height="40" Margin="20,0,20,0"
-                        Click="LogOutClick" Background="#0078D7" Foreground="White"/>
+                        Click="ViewSentInvoicesClick" Background="#0078D7" Foreground="White"/>
+                
 
-                <!-- Add more buttons as needed -->
+                    <!-- Add more buttons as needed -->
             </Grid>
         </DockPanel>
 
@@ -77,4 +70,4 @@
             <!-- Removed Button from Bottom -->
         </Grid>
     </Grid>
-</Window>
+</UserControl>

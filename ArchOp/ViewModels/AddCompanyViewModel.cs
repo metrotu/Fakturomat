@@ -14,8 +14,8 @@ namespace ArchOp.ViewModels
 
         public AddCompanyViewModel()
         {
-        }
 
+        }
 
         public async void AddToUserAddedCompanies()
         { 

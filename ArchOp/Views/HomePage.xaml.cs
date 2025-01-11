@@ -19,14 +19,13 @@ namespace ArchOp
     /// <summary>
     /// Logika interakcji dla klasy HomePage.xaml
     /// </summary>
-    public partial class HomePage : Window
+    public partial class HomePage : UserControl
     {
         public HomePage()
         {
             InitializeComponent();
         }
     
-
         private void CreateInvoiceClick(object sender, RoutedEventArgs e)
         {
             //???? czy tak sie powinno robic
