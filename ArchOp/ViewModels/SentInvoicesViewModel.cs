@@ -19,7 +19,7 @@ namespace ArchOp.ViewModels
         {
 
             var userId = App.SupabaseClient.Auth.CurrentUser.Id;
-            var fetchedInvoices = await Invoice.GetInvoicesAsync(userId);
+            var fetchedInvoices = await DBRequests.GetInvoicesAsync(userId);
             foreach (var invoice in fetchedInvoices)
             {
                 Invoices.Add(invoice);

@@ -1,6 +1,4 @@
-﻿using ArchOp.Models;
-using ArchOp.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,26 +10,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ArchOp.ViewModels;
 
 namespace ArchOp
 {
     /// <summary>
-    /// Logika interakcji dla klasy SentInvoicesWindow.xaml
+    /// Interaction logic for SetCompanyPage.xaml
     /// </summary>
-    public partial class SentInvoicesWindow : Window
+    public partial class SetCompanyPage : Page
     {
-        public SentInvoicesWindow()
+        public SetCompanyPage()
         {
             InitializeComponent();
         }
 
-        private async void DownloadClick(object sender, RoutedEventArgs e)
+        public void SetUserCompanyClick(object sender, RoutedEventArgs e)
         {
-            Button b = (Button)sender;
-            var invoice = await DBRequests.GetInvoiceById(Convert.ToInt32(b.Content));
-            SentInvoicesViewModel.DownloadInvoiceCommand(invoice);
-
+            ((SetCompanyViewModel)DataContext).SetUserCompany();
         }
     }
 }

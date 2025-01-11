@@ -8,6 +8,7 @@ using iText.Layout.Borders;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
+using System.Reactive.Linq;
 
 namespace ArchOp.ViewModels
 {
@@ -27,16 +28,23 @@ namespace ArchOp.ViewModels
         public double Price { get; set; }
         public double TotalPrice { get => Quantity * Price; }
 
+        public ObservableCollection<Company?> UserCompanies { get; set; }
+        public Company SelectedCompany { get; set; }
+
+        public Company OwnCompany { get; set; }
+
         public InvoiceMakerViewModel()
         {
             InvoiceItems = [];
+            LoadOwnCompanyAsync();
+            LoadUserCompaniesAsync();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public async Task<bool> SendInvoice()
         {
-            string pdfPath = $"{await Invoice.GetNewInvoiceId()}.pdf";
+            string pdfPath = $"{await DBRequests.GetNewInvoiceId()}.pdf";
             System.Windows.MessageBox.Show("Invoice is being made.");
             
             var pdfData = await CreatePDF();
@@ -54,6 +62,19 @@ namespace ArchOp.ViewModels
 
         private async Task<byte[]> CreatePDF()
         {
+            //maybe need better protection???
+            if (OwnCompany == null)
+            {
+                System.Windows.MessageBox.Show("Own company details not found.", "Error");
+                return null;
+            }
+
+            if (SelectedCompany == null)
+            {
+                System.Windows.MessageBox.Show("Customer company details not found.", "Error");
+                return null;
+            }
+
             ByteArrayOutputStream byteArrayOutputStream = new();
             PdfWriter writer = new(byteArrayOutputStream);
             PdfDocument pdfDocument = new(writer);
@@ -66,13 +87,20 @@ namespace ArchOp.ViewModels
                 .SimulateBold();
             document.Add(header);
 
+
+            var oName = OwnCompany.CompanyName;
+            var oAddress = OwnCompany.CompanyAddress;
+
+            var cName = SelectedCompany.CompanyName;
+            var cAddress = SelectedCompany.CompanyAddress;
+
             // Adding company and customer details
             Table detailsTable = new Table(2).UseAllAvailableWidth();
-            detailsTable.AddCell(new Cell().Add(new Paragraph(OwnCompanyNameAddress)).SetBorder(Border.NO_BORDER));
+            detailsTable.AddCell(new Cell().Add(new Paragraph($"{oName} \n {oAddress}")).SetBorder(Border.NO_BORDER));
             detailsTable.AddCell(new Cell().Add(new Paragraph($"Invoice # 123456\nInvoice Date: {InvoiceDate:MM/dd/yyyy}\nDue Date: {DueDate:MM/dd/yyyy}"))
                 .SetTextAlignment(TextAlignment.RIGHT).SetBorder(Border.NO_BORDER));
 
-            detailsTable.AddCell(new Cell().Add(new Paragraph(CompanyNameAddressCustomer)).SetMarginTop(20).SetBorder(Border.NO_BORDER));
+            detailsTable.AddCell(new Cell().Add(new Paragraph($"{cName} \n {cAddress}")).SetMarginTop(20).SetBorder(Border.NO_BORDER));
             detailsTable.AddCell(new Cell().SetBorder(Border.NO_BORDER));
 
             document.Add(detailsTable);
@@ -138,8 +166,18 @@ namespace ArchOp.ViewModels
                 System.Windows.MessageBox.Show("Invalid data types for item.", "Warning");
             }
         }
+        public async Task LoadUserCompaniesAsync()
+        {
 
-      
+            UserCompanies = new(await DBRequests.GetUserAddedCompaniesAsync());
+            OnPropertyChanged(nameof(UserCompanies));
+        }
+
+        public async Task LoadOwnCompanyAsync()
+        {
+            OwnCompany = await DBRequests.GetOwnCompany();
+        }
+
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

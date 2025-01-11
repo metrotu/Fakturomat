@@ -29,8 +29,8 @@ namespace ArchOp
         private void CreateInvoiceClick(object sender, RoutedEventArgs e)
         {
             //???? czy tak sie powinno robic
-            ((Button)sender).IsEnabled = false;
-            ((Button)sender).Visibility = Visibility.Hidden;
+            //((Button)sender).IsEnabled = false;
+            //((Button)sender).Visibility = Visibility.Hidden;
             //???
 
             MainFrame.Navigate(new InvoiceMakerPage());
@@ -42,6 +42,15 @@ namespace ArchOp
             sentInvoicesWindow.Show();
 
         }
-    
+
+        private void SetCompanyClick(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new SetCompanyPage());
+        }
+        private void AddCompanyClick(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new AddCompanyPage());
+        }
+
     }
 }

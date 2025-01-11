@@ -46,6 +46,13 @@
                 <Button Grid.Row="3" Content="View Sent Invoices" Height="40" FontSize="15" Margin="20,5,20,5" Click="ViewSentInvoicesClick"/>
                 <Button Grid.Row="15" Content="Log out" FontWeight="Bold" FontSize="26" Height="40" Margin="20,0,20,0"
                         Click="ViewSentInvoicesClick" Background="#0078D7" Foreground="White"/>
+
+            <StackPanel Margin="10">
+                <Button Content="Create Invoice" Height="40" Margin="0,5,0,5" Click="CreateInvoiceClick"/>
+                <Button Content="View Sent Invoices" Height="40" Margin="0,5,0,5" Click="ViewSentInvoicesClick"/>
+                <Button Content="Set Company" Height="40" Margin="0,5,0,5" Click="SetCompanyClick"/>
+                <Button Content="Add Company" Height="40" Margin="0,5,0,5" Click="AddCompanyClick"/>
+
                 <!-- Add more buttons as needed -->
             </Grid>
         </DockPanel>
