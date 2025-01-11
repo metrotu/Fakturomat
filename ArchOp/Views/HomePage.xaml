@@ -36,14 +36,12 @@
                     <RowDefinition Height="60" />
                     <RowDefinition Height="10" />
                 </Grid.RowDefinitions>
-                <Button Grid.Row="1" Content="Create Invoice" FontSize="15" Height="40" Margin="20,5,20,5" Command="{Binding: NavToInvoiceMakerCommand}"/>
-                <Button Grid.Row="3" Content="View Sent Invoices" Height="40" FontSize="15" Margin="20,5,20,5" Command="{Binding: NavToSentInvoiceCommand}"/>
-                <Button Grid.Row="5" Content="Log Out" Height="40" FontSize="15" Margin="20,5,20,5" Command="{Binding: NavToLogOutCommand}"/>
-                <Button Grid.Row="7" Content="Set Company" Height="40" FontSize="15" Margin="20,5,20,5" Command="{Binding: NavToSetCompanyCommand}"/>
-                <Button Grid.Row="9" Content="Add Company" Height="40" FontSize="15" Margin="20,5,20,5" Command="{Binding: NavToAddCompanyCommand}"/>
-                
+                <Button Grid.Row="1" Content="Create Invoice" FontSize="15" Height="40" Margin="20,5,20,5" Command="{Binding NavToInvoiceMakerCommand}"/>
+                <Button Grid.Row="3" Content="View Sent Invoices" Height="40" FontSize="15" Margin="20,5,20,5" Command="{Binding NavToSentInvoiceCommand}"/>
+                <Button Grid.Row="5" Content="Set Company" Height="40" FontSize="15" Margin="20,5,20,5" Command="{Binding NavToSetCompanyCommand}"/>
+                <Button Grid.Row="7" Content="Add Company" Height="40" FontSize="15" Margin="20,5,20,5" Command="{Binding NavToAddCompanyCommand}"/>
                 <Button Grid.Row="15" Content="Log out" FontWeight="Bold" FontSize="26" Height="40" Margin="20,0,20,0"
-                        Click="ViewSentInvoicesClick" Background="#0078D7" Foreground="White"/>
+                        Background="#0078D7" Foreground="White" Command="{Binding LogOutCommand}"/>
                 
 
                     <!-- Add more buttons as needed -->

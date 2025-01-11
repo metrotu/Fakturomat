@@ -12,7 +12,7 @@ namespace ArchOp
     /// <summary>
     /// Interaction logic for InvoiceMakerPage.xaml
     /// </summary>
-    public partial class InvoiceMakerPage : Page
+    public partial class InvoiceMakerPage : UserControl
     {
         public InvoiceMakerPage()
         {

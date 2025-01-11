@@ -14,15 +14,16 @@ namespace ArchOp.ViewModels
         public ICommand NavToInvoiceMakerCommand { get; }
         public ICommand NavToSentInvoiceCommand { get; }
         public ICommand NavToSetCompanyCommand { get; }
-        public ICommand NavToLogOutCommand { get; }
         public ICommand NavToAddCompanyCommand { get; }
+        public ICommand LogOutCommand { get; }
+
         public HomePageViewModel(NavStore navStore)
         {
             this.navStore = navStore;
             NavToInvoiceMakerCommand = new RelayCommand(ExecuteNavToInvoice);
             NavToSentInvoiceCommand = new RelayCommand(ExecuteNavToSentInvoice);
             NavToSetCompanyCommand = new RelayCommand(ExecuteNavToSetCompany);
-            NavToLogOutCommand = new RelayCommand(ExecuteNavToLogOut);
+            LogOutCommand = new RelayCommand(ExecuteLogOut);
             NavToAddCompanyCommand = new RelayCommand(ExecuteNavToAddCompany);
         }
         private void ExecuteNavToInvoice()
@@ -37,7 +38,7 @@ namespace ArchOp.ViewModels
         {
             navStore.CurrentViewModel = new SetCompanyViewModel(navStore);
         }
-        private void ExecuteNavToLogOut()
+        private void ExecuteLogOut()
         {
             App.SupabaseClient.Auth.SignOut();
             navStore.CurrentViewModel = new DashboardViewModel(navStore);

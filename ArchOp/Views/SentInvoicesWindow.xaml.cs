@@ -19,7 +19,7 @@ namespace ArchOp
     /// <summary>
     /// Logika interakcji dla klasy SentInvoicesWindow.xaml
     /// </summary>
-    public partial class SentInvoicesWindow : Window
+    public partial class SentInvoicesWindow : UserControl
     {
         public SentInvoicesWindow()
         {

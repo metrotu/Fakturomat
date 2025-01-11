@@ -36,20 +36,13 @@ namespace ArchOp
             MainFrame.Navigate(new InvoiceMakerPage());
         }
 
-        private void ViewSentInvoicesClick(object sender, RoutedEventArgs e)
-        {
-            SentInvoicesWindow sentInvoicesWindow = new();
-            sentInvoicesWindow.Show();
-
-        }
-
-        private void LogOutClick(object sender, RoutedEventArgs e)
+        /*private void LogOutClick(object sender, RoutedEventArgs e)
         {
             ((HomePageViewModel)DataContext).LogOut();
             MainWindow mainWindow = new();
             mainWindow.Show();
             Close();
-        }
+        }*/
 
         private void SetCompanyClick(object sender, RoutedEventArgs e)
         {

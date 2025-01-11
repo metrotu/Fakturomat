@@ -21,6 +21,18 @@
             <DataTemplate DataType="{x:Type vm:HomePageViewModel}">
                 <local:HomePage/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AddCompanyViewModel}">
+                <local:AddCompanyPage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SetCompanyViewModel}">
+                <local:SetCompanyPage/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SentInvoicesViewModel}">
+                <local:SentInvoicesWindow/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:InvoiceMakerViewModel}">
+                <local:InvoiceMakerPage/>
+            </DataTemplate>
         </ContentControl.Resources>
     </ContentControl>
     <!--

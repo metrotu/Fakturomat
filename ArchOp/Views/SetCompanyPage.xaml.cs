@@ -19,7 +19,7 @@ namespace ArchOp
     /// <summary>
     /// Interaction logic for SetCompanyPage.xaml
     /// </summary>
-    public partial class SetCompanyPage : Page
+    public partial class SetCompanyPage : UserControl
     {
         public SetCompanyPage()
         {

@@ -19,7 +19,7 @@ namespace ArchOp
     /// <summary>
     /// Logika interakcji dla klasy AddCompanyPage.xaml
     /// </summary>
-    public partial class AddCompanyPage : Page
+    public partial class AddCompanyPage : UserControl
     {
         public AddCompanyPage()
         {
