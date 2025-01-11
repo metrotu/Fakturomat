@@ -11,9 +11,13 @@ namespace ArchOp.ViewModels
 {
     public class RegisterViewModel : ViewModelBase
     {
+        private readonly NavStore navStore;
         public string Email { get; set; }
 
-        public RegisterViewModel() { }
+        public RegisterViewModel(NavStore navStore) 
+        {
+            this.navStore = navStore;
+        }
 
         public async Task<int> Register(string password, string rePass)
         {

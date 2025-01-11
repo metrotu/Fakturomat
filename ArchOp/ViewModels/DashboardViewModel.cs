@@ -24,11 +24,11 @@ namespace ArchOp.ViewModels
 
         private void ExecuteNavToRegister()
         {
-            navStore.CurrentViewModel = new RegisterViewModel();   
+            navStore.CurrentViewModel = new RegisterViewModel(navStore);   
         }
         private void ExecuteNavToLogin()
         {
-            navStore.CurrentViewModel = new LoginViewModel();
+            navStore.CurrentViewModel = new LoginViewModel(navStore);
         }
     }
 

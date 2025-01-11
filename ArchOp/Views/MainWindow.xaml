@@ -18,6 +18,9 @@
             <DataTemplate DataType="{x:Type vm:RegisterViewModel}">
                 <local:RegisterPage/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:HomePageViewModel}">
+                <local:HomePage/>
+            </DataTemplate>
         </ContentControl.Resources>
     </ContentControl>
     <!--

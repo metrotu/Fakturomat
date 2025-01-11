@@ -7,10 +7,6 @@
         xmlns:vm="clr-namespace:ArchOp.ViewModels"
         mc:Ignorable="d"
         >
-    <UserControl.DataContext>
-        <vm:LoginViewModel/>
-    </UserControl.DataContext>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height=".5*" />
@@ -41,17 +37,17 @@
             <!-- Password Field -->
             <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="20">
                 <Label Content="Password:" FontWeight="Bold" FontSize="24" Width="200" VerticalAlignment="Center"/>
-                <PasswordBox x:Name="PasswordBox" Width="400" Height="40" FontSize="18"/>
+                <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged" Width="400" Height="40" FontSize="18"/>
             </StackPanel>
 
             <!-- Login Button -->
             <Button Grid.Row="4" Content="Login" Width="200" Height="50"
                     Background="#0078D7" Foreground="White" FontWeight="Bold" FontSize="20"
-                    HorizontalAlignment="Center" Click="LoginButtonClick" Margin="250,5,0,5"/>
+                    HorizontalAlignment="Center" Margin="250,5,0,5" Command="{Binding LoginButtonCommand}"/>
             <!-- Back Button -->
             <Button Grid.Row="6" Content="Back"  Width="200"
                     Background="#0078D7" Foreground="White" FontWeight="Bold" FontSize="20"
-                    HorizontalAlignment="Center"  Margin="0,5,250,5" Click="BackButtonClick"/>
+                    HorizontalAlignment="Center"  Margin="0,5,250,5" Command="{Binding BackButtonCommand}"/>
         </Grid>
     </Grid>
 </UserControl>
