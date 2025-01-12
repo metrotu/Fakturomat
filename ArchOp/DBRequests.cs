@@ -99,8 +99,6 @@ namespace ArchOp
                 .Single();
         }
 
-
-
         public static async Task PairUserCompanyWithUser(string companyName, string companyAddress)
         {
             var company = await GetCompanyByName(companyName);

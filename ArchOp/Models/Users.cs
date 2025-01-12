@@ -20,6 +20,8 @@ namespace ArchOp.Models
 
         [Column("UserAddedCompaniesId")]
         public string? UserAddedCompaniesId { get; set; }
+
+
  
     }
 }

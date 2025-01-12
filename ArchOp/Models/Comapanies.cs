@@ -13,5 +13,6 @@ namespace ArchOp.Models
         [Column("CompanyAddress")]
         public string CompanyAddress { get; set; }
 
+
     }
 }

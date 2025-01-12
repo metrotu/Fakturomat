@@ -13,6 +13,7 @@ namespace ArchOp.Models
         [Column("InvoiceYear")]
         public string? InvoiceYear { get; set; }
     
+    
     }
 
 
