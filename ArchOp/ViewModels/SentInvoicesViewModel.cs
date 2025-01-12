@@ -1,7 +1,10 @@
 ﻿using ArchOp.Models;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Win32;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Input;
 
 namespace ArchOp.ViewModels
 {
@@ -10,6 +13,10 @@ namespace ArchOp.ViewModels
         private readonly NavStore navStore;
 
         public ObservableCollection<Invoice> Invoices { get; set; }
+
+        private RelayCommand<Invoice> downloadInvoiceCommand;
+        public ICommand DownloadInvoiceCommand => downloadInvoiceCommand ??= new RelayCommand<Invoice>(DownloadInvoice);
+
 
         public SentInvoicesViewModel(NavStore navStore)
         {
@@ -27,31 +34,60 @@ namespace ArchOp.ViewModels
             {
                 Invoices.Add(invoice);
             }
-        
+
         }
 
-        public static async void DownloadInvoiceCommand(Invoice invoice)
+        private async void DownloadInvoice(Invoice invoice)
         {
-            if (invoice != null)
+            if (invoice == null)
             {
-                string path = $"{invoice.InvoiceId}_{invoice.InvoiceYear}.pdf";
-                var f = File.Create(path);
-                try
-                {
-                    var bytes = await App.SupabaseClient.Storage.From("invoices").DownloadPublicFile($"{invoice.InvoiceId}_{invoice.InvoiceYear}.pdf");
-                    f.Write(bytes, 0, bytes.Length);
-                }
-                catch(Exception e)
-                {
-                    throw e;
-                }
-                finally
-                {
-                    f.Close();   
-                }
-                MessageBox.Show("Invoice downloaded succesfully.");
+                MessageBox.Show("Invalid invoice.");
+                return;
             }
-            
+
+            await DownloadInvoiceImpl(invoice);
+
+
+        }
+
+        private static async Task DownloadInvoiceImpl(Invoice invoice)
+        {
+            if (invoice == null)
+            {
+                MessageBox.Show("Invalid invoice.");
+                return;
+            }
+
+            var folderDialog = new OpenFolderDialog
+            {
+                Title = "Select Folder",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
+
+            if (folderDialog.ShowDialog() == true)
+            {
+                string selectedPath = folderDialog.FolderName;
+                string fileName = $"{invoice.InvoiceUserId}_{invoice.InvoiceYear}.pdf";
+                string filePath = Path.Combine(selectedPath, fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                {
+                    try
+                    {
+                        var bytes = await App.SupabaseClient.Storage.From("invoices").DownloadPublicFile($"{invoice.InvoiceId}_{invoice.InvoiceYear}.pdf");
+                        await fileStream.WriteAsync(bytes, 0, bytes.Length);
+                        MessageBox.Show("Invoice downloaded successfully.");
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show($"Failed to download invoice: {e.Message}");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No folder selected. Download canceled.");
+            }
         }
 
     }

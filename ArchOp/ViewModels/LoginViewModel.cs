@@ -14,21 +14,34 @@ namespace ArchOp.ViewModels
         private string password;
         public string Password { get=>password; set=>password = value; }
 
+        public bool IsLoginButtonEnabled { get; set; }
+
+
+
+        private RelayCommand loginButtonCommand;
+        public ICommand LoginButtonCommand => loginButtonCommand ??= new RelayCommand(LoginButton);
+
+        private RelayCommand backButtonCommand;
+        public ICommand BackButtonCommand => backButtonCommand ??= new RelayCommand(BackButton);
 
         public LoginViewModel(NavStore navStore) 
         {
+            IsLoginButtonEnabled = true;
             this.navStore = navStore;
-        }
-        public LoginViewModel(NavStore navStore, string password) : this(navStore)
-        {
-            this.password = password;
         }
 
         public async Task<bool> Login(string password)
         {
+            IsLoginButtonEnabled = false;
+            OnPropertyChanged(nameof(IsLoginButtonEnabled));
+
             if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Please enter both username and password.", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
+                
+                IsLoginButtonEnabled = true;
+                OnPropertyChanged(nameof(IsLoginButtonEnabled));
+
                 return false;
             }
             try
@@ -42,16 +55,18 @@ namespace ArchOp.ViewModels
             catch (Exception _)
             {
                 MessageBox.Show("Password and username don't match an existing user.");
+                IsLoginButtonEnabled = true;
+                OnPropertyChanged(nameof(IsLoginButtonEnabled));
                 return false;
             }
+
+            IsLoginButtonEnabled = true;
+            OnPropertyChanged(nameof(IsLoginButtonEnabled));
+
             return true;
+        
         }
 
-        private RelayCommand loginButtonCommand;
-        public ICommand LoginButtonCommand => loginButtonCommand ??= new RelayCommand(LoginButton);
-
-        private RelayCommand backButtonCommand;
-        public ICommand BackButtonCommand => backButtonCommand ??= new RelayCommand(BackButton);
 
         private void BackButton()
         {

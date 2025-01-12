@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ArchOp.Models;
+using iText.Kernel.Pdf;
 
 namespace ArchOp
 {
@@ -70,7 +71,7 @@ namespace ArchOp
         {
             var response = await App.SupabaseClient
                 .From<Invoice>()
-                .Select("InvoiceId,InvoiceYear")
+                .Select("InvoiceId, InvoiceYear, InvoiceUserId")
                 .Where(x => x.UserId == userId)
                 .Get();
 
@@ -187,6 +188,36 @@ namespace ArchOp
             
             return await GetCompanyById(id.Value);
 
+        }
+
+        public static async Task<int> GetUserInvoiceId()
+        {
+            var latestInvoice = await App.SupabaseClient
+                .From<Invoice>()
+                .Select("InvoiceId, InvoiceUserId")
+                .Where(x => x.UserId == App.SupabaseClient.Auth.CurrentUser.Id)
+                .Order("InvoiceUserId", Supabase.Postgrest.Constants.Ordering.Descending)
+                .Range(0, 0)
+                .Single();
+
+            if (latestInvoice == null || latestInvoice.InvoiceUserId == null)
+            {
+                return 1;
+            }
+            return latestInvoice.InvoiceUserId.Value+1;
+
+        }
+
+        public static async Task InsertInvoice(byte[]? pdfData, string pdfPath, string invoiceId, string userId, string invoiceYear)
+        {
+            await App.SupabaseClient.Storage.From("invoices").Upload(pdfData, $"{pdfPath}");
+            await App.SupabaseClient.From<Invoice>().Insert(new Invoice
+            {
+                InvoiceId = Convert.ToInt32(invoiceId),
+                UserId = userId,
+                InvoiceYear = invoiceYear,
+                InvoiceUserId = await GetUserInvoiceId()
+            });
         }
 
     }

@@ -43,7 +43,7 @@
             <!-- Login Button -->
             <Button Grid.Row="4" Content="Login" Width="200" Height="50"
                     Background="#0078D7" Foreground="White" FontWeight="Bold" FontSize="20"
-                    HorizontalAlignment="Center" Margin="250,5,0,5" Command="{Binding LoginButtonCommand}"/>
+                    HorizontalAlignment="Center" Margin="250,5,0,5" IsEnabled="{Binding IsLoginButtonEnabled}" Command="{Binding LoginButtonCommand}"/>
             <!-- Back Button -->
             <Button Grid.Row="6" Content="Back"  Width="200"
                     Background="#0078D7" Foreground="White" FontWeight="Bold" FontSize="20"

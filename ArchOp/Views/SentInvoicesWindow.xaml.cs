@@ -27,12 +27,11 @@ namespace ArchOp
             DataContext = new SentInvoicesViewModel(navStore);
         }
 
-        private async void DownloadClick(object sender, RoutedEventArgs e)
+        /*private async void DownloadClick(object sender, RoutedEventArgs e)
         {
             Button b = (Button)sender;
             var invoice = await DBRequests.GetInvoiceById(Convert.ToInt32(b.Content));
             SentInvoicesViewModel.DownloadInvoiceCommand(invoice);
-
-        }
+        }*/
     }
 }

@@ -13,7 +13,10 @@
                     <GridViewColumn Header="Invoice Name" Width="300">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                        <Button Content="{Binding InvoiceId}" Click="DownloadClick"/>
+                                <Button Content="{Binding InvoiceDisplayName}" 
+                                        Command="{Binding DataContext.DownloadInvoiceCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                        CommandParameter="{Binding}" />
+
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

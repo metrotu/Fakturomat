@@ -66,15 +66,22 @@ namespace ArchOp.ViewModels
             string pdfPath = $"{invoiceId = await DBRequests.GetNewInvoiceId()}_{InvoiceDate.Year}.pdf";
             System.Windows.MessageBox.Show("Invoice is being made.");
             
-            var pdfData = await CreatePDF(invoiceId);
-                                                                                            //id_rok.pdf
+            var pdfData = (await CreatePDF(invoiceId));
+            //id_rok.pdf
+            /*
             await App.SupabaseClient.Storage.From("invoices").Upload(pdfData, $"{pdfPath}");
             await App.SupabaseClient.From<Invoice>().Insert(new Invoice
             {
                 InvoiceId = Convert.ToInt32(pdfPath.Split("_")[0]),
                 UserId = App.SupabaseClient.Auth.CurrentUser.Id,
-                InvoiceYear = InvoiceDate.Year.ToString()
+                InvoiceYear = InvoiceDate.Year.ToString(),
+                UserInvoiceId = await DBRequests.GetUserInvoiceId()
             });
+            */
+            DBRequests.InsertInvoice(pdfData, pdfPath, pdfPath.Split("_")[0],
+                App.SupabaseClient.Auth.CurrentUser.Id, InvoiceDate.Year.ToString());
+
+
 
             System.Windows.MessageBox.Show("Invoice has been sent.");
             
