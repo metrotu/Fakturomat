@@ -78,7 +78,7 @@ namespace ArchOp.ViewModels
                 UserInvoiceId = await DBRequests.GetUserInvoiceId()
             });
             */
-            DBRequests.InsertInvoice(pdfData, pdfPath, pdfPath.Split("_")[0],
+            await DBRequests.InsertInvoice(pdfData, pdfPath, pdfPath.Split("_")[0],
                 App.SupabaseClient.Auth.CurrentUser.Id, InvoiceDate.Year.ToString());
 
 

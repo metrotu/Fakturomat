@@ -17,6 +17,7 @@ namespace ArchOp.Models
         public string? InvoiceYear { get; set; }
         [Column("InvoiceUserId")]
         public int? InvoiceUserId { get; set; }
+        [Column("InvoiceDisplayName")]
         public string InvoiceDisplayName { get=> $"{InvoiceUserId} / {InvoiceYear}"; }
 
     }
