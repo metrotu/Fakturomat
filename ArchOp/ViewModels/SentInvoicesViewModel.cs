@@ -67,7 +67,8 @@ namespace ArchOp.ViewModels
             if (folderDialog.ShowDialog() == true)
             {
                 string selectedPath = folderDialog.FolderName;
-                string fileName = $"{invoice.InvoiceUserId}_{invoice.InvoiceYear}.pdf";
+                var s = invoice.InvoiceDisplayName.Split("/");
+                string fileName = $"{s[0].Trim()}_{s[1].Trim()}.pdf";
                 string filePath = Path.Combine(selectedPath, fileName);
 
                 using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
@@ -81,6 +82,10 @@ namespace ArchOp.ViewModels
                     catch (Exception e)
                     {
                         MessageBox.Show($"Failed to download invoice: {e.Message}");
+                    }
+                    finally
+                    {
+                        fileStream.Close();
                     }
                 }
             }

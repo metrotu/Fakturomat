@@ -190,7 +190,7 @@ namespace ArchOp
 
         }
 
-        public static async Task<int> GetUserInvoiceId()
+        public static async Task<int> GetInvoiceUserId()
         {
             var latestInvoice = await App.SupabaseClient
                 .From<Invoice>()
@@ -208,16 +208,19 @@ namespace ArchOp
 
         }
 
-        public static async Task InsertInvoice(byte[]? pdfData, string pdfPath, string invoiceId, string userId, string invoiceYear)
+        public static async Task<Invoice> InsertInvoice(byte[]? pdfData, string pdfPath, string invoiceId,
+            string userId, string invoiceYear, int invoiceUserId)
         {
             await App.SupabaseClient.Storage.From("invoices").Upload(pdfData, $"{pdfPath}");
-            await App.SupabaseClient.From<Invoice>().Insert(new Invoice
+            var h = new Invoice
             {
                 InvoiceId = Convert.ToInt32(invoiceId),
                 UserId = userId,
                 InvoiceYear = invoiceYear,
-                InvoiceUserId = await GetUserInvoiceId()
-            });
+                InvoiceUserId = invoiceUserId
+            };
+            await App.SupabaseClient.From<Invoice>().Insert(h);
+            return h;
         }
 
     }

@@ -63,10 +63,11 @@ namespace ArchOp.ViewModels
             IsCreateInvoiceEnabled = false;
             OnPropertyChanged(nameof(IsCreateInvoiceEnabled));
             int invoiceId;
+            var invoiceUserId = await DBRequests.GetInvoiceUserId();
             string pdfPath = $"{invoiceId = await DBRequests.GetNewInvoiceId()}_{InvoiceDate.Year}.pdf";
             System.Windows.MessageBox.Show("Invoice is being made.");
             
-            var pdfData = (await CreatePDF(invoiceId));
+            var pdfData = await CreatePDF(invoiceId, invoiceUserId);
             //id_rok.pdf
             /*
             await App.SupabaseClient.Storage.From("invoices").Upload(pdfData, $"{pdfPath}");
@@ -79,7 +80,7 @@ namespace ArchOp.ViewModels
             });
             */
             await DBRequests.InsertInvoice(pdfData, pdfPath, pdfPath.Split("_")[0],
-                App.SupabaseClient.Auth.CurrentUser.Id, InvoiceDate.Year.ToString());
+                App.SupabaseClient.Auth.CurrentUser.Id, InvoiceDate.Year.ToString(), invoiceUserId);
 
 
 
@@ -91,7 +92,7 @@ namespace ArchOp.ViewModels
             return true;
         }
 
-        private async Task<byte[]> CreatePDF(int invoiceId)
+        private async Task<byte[]> CreatePDF(int invoiceId, int invoiceUserId)
         {
             //maybe need better protection???
             if (OwnCompany == null)
@@ -128,7 +129,7 @@ namespace ArchOp.ViewModels
             // Adding company and customer details
             Table detailsTable = new Table(2).UseAllAvailableWidth();
             detailsTable.AddCell(new Cell().Add(new Paragraph($"{oName} \n {oAddress}")).SetBorder(Border.NO_BORDER));
-            detailsTable.AddCell(new Cell().Add(new Paragraph($"Invoice # {invoiceId}\nInvoice Date: {InvoiceDate:MM/dd/yyyy}\nDue Date: {DueDate:MM/dd/yyyy}"))
+            detailsTable.AddCell(new Cell().Add(new Paragraph($"Invoice # {invoiceUserId}\nInvoice Date: {InvoiceDate:MM/dd/yyyy}\nDue Date: {DueDate:MM/dd/yyyy}"))
                 .SetTextAlignment(TextAlignment.RIGHT).SetBorder(Border.NO_BORDER));
 
             detailsTable.AddCell(new Cell().Add(new Paragraph($"{cName} \n {cAddress}")).SetMarginTop(20).SetBorder(Border.NO_BORDER));
