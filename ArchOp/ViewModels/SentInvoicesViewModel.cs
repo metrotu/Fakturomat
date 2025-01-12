@@ -77,7 +77,6 @@ namespace ArchOp.ViewModels
                     {
                         var bytes = await App.SupabaseClient.Storage.From("invoices").DownloadPublicFile($"{invoice.InvoiceId}_{invoice.InvoiceYear}.pdf");
                         await fileStream.WriteAsync(bytes, 0, bytes.Length);
-                        MessageBox.Show("Invoice downloaded successfully.");
                     }
                     catch (Exception e)
                     {
@@ -86,7 +85,10 @@ namespace ArchOp.ViewModels
                     finally
                     {
                         fileStream.Close();
+
                     }
+                    MessageBox.Show("Invoice downloaded successfully.");
+
                 }
             }
             else

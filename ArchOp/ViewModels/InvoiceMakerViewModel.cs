@@ -26,11 +26,14 @@ namespace ArchOp.ViewModels
 
         private DateTime InvoiceDate => DateTime.Now;
 
+        private double quantity;
+        private double price;
+
         public string Name {  get; set; }
         public string Description { get; set; }
-        public int Quantity { get; set; }
-        public double Price { get; set; }
-        public double TotalPrice { get => Quantity * Price; }
+        public string Quantity { get; set; }
+        public string Price { get; set; }
+        public double TotalPrice { get => Convert.ToDouble(Quantity) * Convert.ToDouble(Price); }
 
         public ObservableCollection<Company?> UserCompanies { get; set; }
         public Company SelectedCompany { get; set; }
@@ -49,20 +52,20 @@ namespace ArchOp.ViewModels
         {
             this.navStore = navStore;
             InvoiceItems = [];
-            IsCreateInvoiceEnabled = true;
 
             DueDate = DateTime.Now;
 
-            OnPropertyChanged(nameof(IsCreateInvoiceEnabled));
 
             LoadOwnCompanyAsync();
             LoadUserCompaniesAsync();
         }
 
-        public async Task<bool> SendInvoice()
+        public async Task<bool> CreateInvoice()
         {
+            
             IsCreateInvoiceEnabled = false;
             OnPropertyChanged(nameof(IsCreateInvoiceEnabled));
+            
             int invoiceId;
             var invoiceUserId = await DBRequests.GetInvoiceUserId();
             string pdfPath = $"{invoiceId = await DBRequests.GetNewInvoiceId()}_{InvoiceDate.Year}.pdf";
@@ -85,7 +88,7 @@ namespace ArchOp.ViewModels
 
 
 
-            System.Windows.MessageBox.Show("Invoice has been sent.");
+            System.Windows.MessageBox.Show("Invoice has been created.");
             
             IsCreateInvoiceEnabled = true;
             OnPropertyChanged(nameof(IsCreateInvoiceEnabled));
@@ -107,6 +110,7 @@ namespace ArchOp.ViewModels
                 System.Windows.MessageBox.Show("Customer company details not found.", "Error");
                 return null;
             }
+
 
             ByteArrayOutputStream byteArrayOutputStream = new();
             PdfWriter writer = new(byteArrayOutputStream);
@@ -187,13 +191,16 @@ namespace ArchOp.ViewModels
             return byteArrayOutputStream.ToArray();
         }
 
-
-
         public void AddItem()
         {
             try
             {
-                InvoiceItems.Add(new Item(Name, Description, Price, Quantity, TotalPrice));
+                var item = new Item(Name, Description, Convert.ToDouble(Price), Convert.ToDouble(Quantity), TotalPrice);
+                InvoiceItems.Add(item);
+
+                IsCreateInvoiceEnabled = true;
+
+                OnPropertyChanged(nameof(IsCreateInvoiceEnabled));
                 OnPropertyChanged(nameof(InvoiceItems));
             }
             catch
@@ -220,7 +227,7 @@ namespace ArchOp.ViewModels
 
         private async void CreateInvoiceButton()
         {
-            await SendInvoice();
+            await CreateInvoice();
         }
 
         private async void AddItemButton()

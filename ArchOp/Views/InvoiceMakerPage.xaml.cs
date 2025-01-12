@@ -19,22 +19,6 @@ namespace ArchOp
             InitializeComponent();
             DataContext = new InvoiceMakerViewModel(navStore);
         }
-
-        private async void SendInvoiceClick(object sender, RoutedEventArgs e)
-        {
-            ((Button)sender).IsEnabled = false;
-            ((Button)sender).IsEnabled = await ((InvoiceMakerViewModel)DataContext).SendInvoice();
-
-        }
-
-        private void AddItemClick(object sender, RoutedEventArgs e)
-        {
-            ((InvoiceMakerViewModel)DataContext).AddItem();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
     }
 }
