@@ -41,7 +41,7 @@ namespace ArchOp.ViewModels
             CurrentPage = new SentInvoicesWindow(navStore);
             OnPropertyChanged(nameof(CurrentPage));
         }
-        private void ExecuteNavToSetCompany()
+        public void ExecuteNavToSetCompany()
         {
             CurrentPage = new SetCompanyPage(navStore);
             OnPropertyChanged(nameof(CurrentPage));
@@ -56,5 +56,6 @@ namespace ArchOp.ViewModels
             CurrentPage = new AddCompanyPage(navStore);
             OnPropertyChanged(nameof(CurrentPage));
         }
+       
     }
 }

@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Reactive.Linq;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
+using System.Security.Policy;
 
 namespace ArchOp.ViewModels
 {
@@ -210,8 +211,11 @@ namespace ArchOp.ViewModels
 
         public async Task LoadOwnCompanyAsync()
         {
+            
             OwnCompany = await DBRequests.GetOwnCompany();
+            // Notify the UI about the property change.
             OnPropertyChanged(nameof(OwnCompany));
+            
         }
 
         private async void CreateInvoiceButton()

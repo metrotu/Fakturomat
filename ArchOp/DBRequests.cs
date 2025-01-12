@@ -180,12 +180,40 @@ namespace ArchOp
 
         public static async Task<Company> GetOwnCompany()
         {
-            var id = (await App.SupabaseClient
-                .From<Users>()
-                .Select("UserCompanyId")
-                .Where(x => x.SupabaseUserId == App.SupabaseClient.Auth.CurrentUser.Id)
-                .Single()).UserCompanyId;
-            
+            var id = default(int?); // Use nullable int to handle cases where no ID is retrieved
+
+            try
+            {
+                var userResult = await App.SupabaseClient
+                    .From<Users>()
+                    .Select("UserCompanyId")
+                    .Where(x => x.SupabaseUserId == App.SupabaseClient.Auth.CurrentUser.Id)
+                    .Single();
+
+                if (userResult != null)
+                {
+                    id = userResult.UserCompanyId;
+                }
+
+                if (id == null)
+                {
+                    System.Windows.MessageBox.Show(
+                        "No UserCompanyId found for the current user.",
+                        "Information",
+                        System.Windows.MessageBoxButton.OK,
+                        System.Windows.MessageBoxImage.Information
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(
+                    $"An error occurred while retrieving UserCompanyId: {ex.Message}",
+                    "Error",
+                    System.Windows.MessageBoxButton.OK,
+                    System.Windows.MessageBoxImage.Error
+                );
+            }
             return await GetCompanyById(id.Value);
 
         }
