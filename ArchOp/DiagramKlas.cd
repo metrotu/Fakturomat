@@ -1,210 +1,196 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="ArchOp.AddCompanyPage" BaseTypeListCollapsed="true">
-    <Position X="18" Y="9.25" Width="1.5" />
+  <Class Name="ArchOp.Models.Company" Collapsed="true">
+    <Position X="0.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Comapanies.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchOp.Models.Invoice" Collapsed="true">
+    <Position X="2.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAEAAAAAAAAAAAAAAAgQAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Invoices.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchOp.Models.Item" Collapsed="true">
+    <Position X="0.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAEAQCgAABAAAAAAASAAAAEQEAAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchOp.Models.Users" Collapsed="true">
+    <Position X="2.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAIBABAAAAAA=</HashCode>
+      <FileName>Models\Users.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchOp.Utils.RegexUtilities" Collapsed="true">
+    <Position X="5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Utils\RegexUtilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchOp.ViewModels.AddCompanyViewModel" Collapsed="true">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAEACAKAEAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>ViewModels\AddCompanyViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchOp.ViewModels.DashboardViewModel" Collapsed="true">
+    <Position X="12.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAQCAAAAAAAAAAAEAAEAAAAAAA=</HashCode>
+      <FileName>ViewModels\DashboardViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchOp.ViewModels.HomePageViewModel" Collapsed="true">
+    <Position X="17.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAkEAAAAAAAAAAACAAAAAAAAAAAgAAAAAIAVAAEAI=</HashCode>
+      <FileName>ViewModels\HomePageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchOp.ViewModels.InvoiceMakerViewModel" Collapsed="true">
+    <Position X="21.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAIFAAQgAQAiJCAAQCQAAAQQiAEAQBDAACAAggQBAAA=</HashCode>
+      <FileName>ViewModels\InvoiceMakerViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchOp.ViewModels.LoginViewModel" Collapsed="true">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABACAAACAAAAAAACABAAAAAAAAAAgKAAAQAoAAAAA=</HashCode>
+      <FileName>ViewModels\LoginViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchOp.ViewModels.MainWindowViewModel" Collapsed="true">
+    <Position X="15" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIEAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\MainWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchOp.ViewModels.RegisterViewModel" Collapsed="true">
+    <Position X="19.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIACAACCAAACAhAAAAAIABAQCCAAAAggAAAAA=</HashCode>
+      <FileName>ViewModels\RegisterViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchOp.ViewModels.SentInvoicesViewModel" Collapsed="true">
+    <Position X="24" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAEAAAAAABAAACAAAAAAAAAAAAAAAQAAACAAABA=</HashCode>
+      <FileName>ViewModels\SentInvoicesViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchOp.ViewModels.SetCompanyViewModel" Collapsed="true">
+    <Position X="10.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAQAAAAAAAAAACAKAAAAAAAAIAAAAAAAAACAAAA=</HashCode>
+      <FileName>ViewModels\SetCompanyViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchOp.ViewModels.ViewModelBase" Collapsed="true">
+    <Position X="15" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ViewModelBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ArchOp.AddCompanyPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\AddCompanyPage.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="ArchOp.App">
-    <Position X="19.75" Y="9.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
-      <FileName>App.xaml.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.DashboardPage" BaseTypeListCollapsed="true">
-    <Position X="18.75" Y="11.25" Width="1.5" />
+  <Class Name="ArchOp.DashboardPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\DashboardPage.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="ArchOp.DBRequests">
-    <Position X="9.5" Y="11" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAABEAAABAAAAgAABAAIAAAAAAAQAAAGIAAIAgAAAAA=</HashCode>
-      <FileName>DBRequests.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.HomePage" BaseTypeListCollapsed="true">
-    <Position X="16" Y="9.25" Width="1.5" />
+  <Class Name="ArchOp.HomePage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\HomePage.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="ArchOp.InvoiceMakerPage" BaseTypeListCollapsed="true">
-    <Position X="16.75" Y="11" Width="1.5" />
+  <Class Name="ArchOp.InvoiceMakerPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEABAAAQAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\InvoiceMakerPage.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="ArchOp.LoginPage" BaseTypeListCollapsed="true">
-    <Position X="7.25" Y="11" Width="1.5" />
+  <Class Name="ArchOp.LoginPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
       <FileName>Views\LoginPage.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="ArchOp.MainWindow" BaseTypeListCollapsed="true">
-    <Position X="14.25" Y="9.25" Width="1.5" />
+  <Class Name="ArchOp.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="ArchOp.NavStore">
-    <Position X="25" Y="9.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAIEAAAABAAAAAAAAAAAAAAgAAAAAgAAA=</HashCode>
-      <FileName>NavStore.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.RegisterPage" BaseTypeListCollapsed="true">
-    <Position X="23" Y="11.5" Width="1.5" />
+  <Class Name="ArchOp.RegisterPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAQAAAAAAAAAAAAAAACAAAAAAAAAAAAAEAAAAAA=</HashCode>
       <FileName>Views\RegisterPage.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="ArchOp.SentInvoicesWindow" BaseTypeListCollapsed="true">
-    <Position X="5" Y="11" Width="1.5" />
+  <Class Name="ArchOp.SentInvoicesWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\SentInvoicesWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="ArchOp.SetCompanyPage" BaseTypeListCollapsed="true">
-    <Position X="12.5" Y="9.25" Width="1.5" />
+  <Class Name="ArchOp.SetCompanyPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Views\SetCompanyPage.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="ArchOp.Utils.RegexUtilities">
-    <Position X="12.5" Y="11" Width="1.5" />
-    <NestedTypes>
-      <Enum Name="ArchOp.Utils.RegexUtilities.PasswordStrength" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Utils\RegexUtilities.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
+  <Class Name="ArchOp.DBRequests" Collapsed="true">
+    <Position X="0.5" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
-      <FileName>Utils\RegexUtilities.cs</FileName>
+      <HashCode>AAABEAEABAAAAgAABQAIAAAAAAAQAAAGIAAIAgAAAAA=</HashCode>
+      <FileName>DBRequests.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ArchOp.Models.Company">
-    <Position X="14.5" Y="11" Width="1.5" />
+  <Class Name="ArchOp.NavStore" Collapsed="true">
+    <Position X="2.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAQAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Comapanies.cs</FileName>
+      <HashCode>AAAAAAAAAAAAIEAAAABAAAAAAAAAAAAAAgAAAAAgAAA=</HashCode>
+      <FileName>NavStore.cs</FileName>
     </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.Models.Invoice">
-    <Position X="21.5" Y="9.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAIAAAAAAAAAAAAAAAAAgQAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\Invoices.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.Models.Item">
-    <Position X="21" Y="11.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAQAgAAAAAAAAAASAAAAAQAAAAAAAgAAAAAA=</HashCode>
-      <FileName>Models\Item.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.Models.Users">
-    <Position X="23.25" Y="9.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAIBABAAAAAA=</HashCode>
-      <FileName>Models\Users.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.ViewModels.AddCompanyViewModel">
-    <Position X="16.5" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAQAAAAAAAAAAEACAKAEAAAAAAAAAAAAAAAACAAAA=</HashCode>
-      <FileName>ViewModels\AddCompanyViewModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.ViewModels.DashboardViewModel">
-    <Position X="0.75" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAACAQCAAAAAAAAAAAEAAEAAAAAAA=</HashCode>
-      <FileName>ViewModels\DashboardViewModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.ViewModels.HomePageViewModel">
-    <Position X="5.25" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>BAAAkEAAAAAAAAAAACAAAAAAAAAAAgAAAAAIAVAAEAI=</HashCode>
-      <FileName>ViewModels\HomePageViewModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.ViewModels.InvoiceMakerViewModel">
-    <Position X="9.75" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>BAJEAAQAAQAiACAAQCAQAAQQmAAAQBDAACAAggQBAAA=</HashCode>
-      <FileName>ViewModels\InvoiceMakerViewModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.ViewModels.LoginViewModel">
-    <Position X="12" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAABACAAACAAAAAAACABAAAAAAAAAAgKAAAQAgAAAAA=</HashCode>
-      <FileName>ViewModels\LoginViewModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.ViewModels.MainWindowViewModel">
-    <Position X="14.25" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAIEAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ViewModels\MainWindowViewModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.ViewModels.RegisterViewModel">
-    <Position X="18.75" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAIACAACCAAACAhAAAAAIABAQCCAAAAAgAAAAA=</HashCode>
-      <FileName>ViewModels\RegisterViewModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.ViewModels.SentInvoicesViewModel">
-    <Position X="3" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAEAAAAAABAAACAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
-      <FileName>ViewModels\SentInvoicesViewModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.ViewModels.SetCompanyViewModel">
-    <Position X="7.5" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAQAQAAAAAAAAAACAKAAAAAAAAIAAAAAAAAACAAAA=</HashCode>
-      <FileName>ViewModels\SetCompanyViewModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="ArchOp.ViewModels.ViewModelBase">
-    <Position X="9.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAEAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ViewModels\ViewModelBase.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
