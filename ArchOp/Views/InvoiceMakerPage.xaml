@@ -54,6 +54,13 @@
                 <TextBox Width="80" Text="{Binding Quantity}" Margin="5" />
                 <Label Content="Unit Price" />
                 <TextBox Width="100" Text="{Binding Price}" Margin="5" />
+                <Label Content="VAT" />
+                <ComboBox Width="80" 
+                  ItemsSource="{Binding AvailableVat}" 
+                  SelectedItem="{Binding SelectedVat}" 
+                  SelectedValuePath="." 
+                  Margin="0,0,10,0">
+                </ComboBox>
                 <Button Content="Add Item" Command="{Binding AddItemCommand}" Width="100" />
             </StackPanel>
         </StackPanel>
@@ -65,7 +72,9 @@
                 <DataGridTextColumn Width="2*" Header="Description" Binding="{Binding Description}" />
                 <DataGridTextColumn Width=".5*" Header="Quantity" Binding="{Binding Quantity}"/>
                 <DataGridTextColumn Width="*" Header="Unit Price" Binding="{Binding Price}" />
-                <DataGridTextColumn Width="*" Header="Total Price" Binding="{Binding TotalPrice}" />
+                <DataGridTextColumn Width="*" Header="Total Brutto" Binding="{Binding ItemBrutto}" />
+                <DataGridTextColumn Width="*" Header="Total Netto" Binding="{Binding ItemNetto}" />
+
             </DataGrid.Columns>
         </DataGrid>
 

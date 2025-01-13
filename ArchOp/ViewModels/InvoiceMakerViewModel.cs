@@ -12,14 +12,13 @@ using System.Reactive.Linq;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
 using System.Security.Policy;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ArchOp.ViewModels
 {
     internal class InvoiceMakerViewModel : ViewModelBase
     {
         private readonly NavStore navStore;
-        public string CompanyNameAddressCustomer { get; set; }
-        public string OwnCompanyNameAddress { get; set; }
         public string SummaryDescription { get; set; }
         public DateTime DueDate { get; set; }
         public ObservableCollection<Item> InvoiceItems { get; set; }
@@ -34,6 +33,25 @@ namespace ArchOp.ViewModels
         public string Quantity { get; set; }
         public string Price { get; set; }
         public double TotalPrice { get => Convert.ToDouble(Quantity) * Convert.ToDouble(Price); }
+
+        private string[] availableVat = ["23%", "8%", "5%","0%", "Exempt"];
+        public string[] AvailableVat { get => availableVat; }
+        private double? selectedVat;
+        public string SelectedVat
+        {
+            get => selectedVat != null ? $"{selectedVat}%" : "Exempt";
+            set
+            {
+                if (value == "Exempt")
+                {
+                    selectedVat = null;
+                }
+                else
+                {
+                    selectedVat = Convert.ToDouble(value.TrimEnd('%'))/100.0;
+                }
+            }
+        }
 
         public ObservableCollection<Company?> UserCompanies { get; set; }
         public Company SelectedCompany { get; set; }
@@ -62,7 +80,13 @@ namespace ArchOp.ViewModels
 
         public async Task<bool> CreateInvoice()
         {
-            
+            if (SelectedCompany == null)
+            {
+                System.Windows.MessageBox.Show("Please select a company", "Error.");
+                return false;
+            }
+
+
             IsCreateInvoiceEnabled = false;
             OnPropertyChanged(nameof(IsCreateInvoiceEnabled));
             
@@ -143,49 +167,63 @@ namespace ArchOp.ViewModels
             document.Add(detailsTable);
 
             // Adding the item table
-            Table itemTable = new Table(new float[] { 3, 6, 2, 2, 2 }).UseAllAvailableWidth().SetMarginTop(20);
+            Table itemTable = new Table(new float[]  {3, 6, 2, 2, 2, 2, 2}).UseAllAvailableWidth().SetMarginTop(20);
             itemTable.AddHeaderCell("Item");
             itemTable.AddHeaderCell("Description");
             itemTable.AddHeaderCell("Unit Price");
             itemTable.AddHeaderCell("Quantity");
-            itemTable.AddHeaderCell("Amount");
+            itemTable.AddHeaderCell("Brutto");
+            itemTable.AddHeaderCell("Netto");
+            itemTable.AddHeaderCell("VAT");
 
-            double subtotal = 0;
 
+
+            double brutto = 0;
+            double netto = 0;
             foreach (var item in InvoiceItems)
             {
                 itemTable.AddCell(item.Name);
                 itemTable.AddCell(item.Description);
                 itemTable.AddCell(item.Price.ToString("F2"));
                 itemTable.AddCell(item.Quantity.ToString());
-                double amount = item.Price * item.Quantity;
-                subtotal += amount;
-                itemTable.AddCell(amount.ToString("F2"));
+                var b = item.Brutto();
+                var n = item.Netto();
+                brutto += b;
+                netto += n;
+                itemTable.AddCell(b.ToString());
+                itemTable.AddCell(n.ToString());
+                var s = item.DisplayVat == null ? "Exempt" : $"{item.Vat * 100}%";
+                itemTable.AddCell(s);
+
             }
 
             document.Add(itemTable);
 
             // Adding summary section
             Table summaryTable = new Table(2).UseAllAvailableWidth().SetMarginTop(20);
-            summaryTable.AddCell(new Cell().Add(new Paragraph("Subtotal:")).SetBorder(Border.NO_BORDER));
-            summaryTable.AddCell(new Cell().Add(new Paragraph(subtotal.ToString("F2")).SetTextAlignment(TextAlignment.RIGHT)).SetBorder(Border.NO_BORDER));
+            summaryTable.AddCell(new Cell().Add(new Paragraph("Brutto:")).SetBorder(Border.NO_BORDER));
+            summaryTable.AddCell(new Cell().Add(new Paragraph(brutto.ToString("F2")).SetTextAlignment(TextAlignment.RIGHT)).SetBorder(Border.NO_BORDER));
 
-            double total = subtotal; // Add any discounts or taxes here if needed
-            summaryTable.AddCell(new Cell().Add(new Paragraph("Total:")).SetBorder(Border.NO_BORDER));
-            summaryTable.AddCell(new Cell().Add(new Paragraph(total.ToString("F2")).SetTextAlignment(TextAlignment.RIGHT)).SetBorder(Border.NO_BORDER));
+            summaryTable.AddCell(new Cell().Add(new Paragraph("Netto:")).SetBorder(Border.NO_BORDER));
+            summaryTable.AddCell(new Cell().Add(new Paragraph(netto.ToString("F2")).SetTextAlignment(TextAlignment.RIGHT)).SetBorder(Border.NO_BORDER));
 
             summaryTable.AddCell(new Cell().Add(new Paragraph("Amount Paid:")).SetBorder(Border.NO_BORDER));
             summaryTable.AddCell(new Cell().Add(new Paragraph("0.00").SetTextAlignment(TextAlignment.RIGHT)).SetBorder(Border.NO_BORDER));
 
+            summaryTable.AddCell(new Cell().Add(new Paragraph("VAT:")).SetBorder(Border.NO_BORDER));
+            summaryTable.AddCell(new Cell().Add(new Paragraph($"{brutto-netto}").SetTextAlignment(TextAlignment.RIGHT)).SetBorder(Border.NO_BORDER));
+
+
+
             summaryTable.AddCell(new Cell().Add(new Paragraph("Balance Due:").SimulateBold()).SetBorder(Border.NO_BORDER));
-            summaryTable.AddCell(new Cell().Add(new Paragraph(total.ToString("F2")).SetTextAlignment(TextAlignment.RIGHT).SimulateBold()).SetBorder(Border.NO_BORDER));
+            summaryTable.AddCell(new Cell().Add(new Paragraph(netto.ToString("F2")).SetTextAlignment(TextAlignment.RIGHT).SimulateBold()).SetBorder(Border.NO_BORDER));
 
             document.Add(summaryTable);
 
             // Adding notes
-            Paragraph notes = new Paragraph("NOTES: Provide a concise, professional description of the services, product, and discount listed above.")
-                .SetFontSize(10).SetMarginTop(20);
-            document.Add(notes);
+            //Paragraph notes = new Paragraph("NOTES: Provide a concise, professional description of the services, product, and discount listed above.")
+            //    .SetFontSize(10).SetMarginTop(20);
+            //document.Add(notes);
 
             document.Close();
             return byteArrayOutputStream.ToArray();
@@ -195,7 +233,13 @@ namespace ArchOp.ViewModels
         {
             try
             {
-                var item = new Item(Name, Description, Convert.ToDouble(Price), Convert.ToDouble(Quantity), TotalPrice);
+                if (Name.IsNullOrEmpty())
+                {
+                    System.Windows.MessageBox.Show("Added items need to have a name.");
+                    return;
+
+                }
+                var item = new Item(Name, Description, Convert.ToDouble(Price), Convert.ToDouble(Quantity), TotalPrice, selectedVat);
                 InvoiceItems.Add(item);
 
                 IsCreateInvoiceEnabled = true;

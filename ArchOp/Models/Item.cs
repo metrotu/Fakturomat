@@ -6,23 +6,21 @@ using System.Threading.Tasks;
 
 namespace ArchOp.Models
 {
-    internal class Item
+    internal class Item(string name, string? description, double price, double quantity, double totalPrice, double? vat)
     {
-        public string Name { get; set; }
-        public string? Description { get; set; } 
-        public double Price { get; set; }
-        public double Quantity { get; set; }
-        public double TotalPrice { get; set; } 
+        public string Name { get; set; } = name;
+        public string? Description { get; set; } = description;
+        public double Price { get; set; } = price;
+        public double Quantity { get; set; } = quantity;
+        public double TotalPrice { get; set; } = totalPrice;
+        public double? Vat { get; set; } = vat == null ? 0 : vat.Value;
+        public double? DisplayVat { get=>vat; }
+        public double ItemBrutto { get => Brutto(); }
+
+        public double ItemNetto { get=> Netto(); }
+
         public double Amount() => Price * Quantity;
-    
-        public Item(string name, string? description, double price, double quantity, double totalPrice)
-        {
-            Name = name;
-            Description = description;
-            Price = price;
-            Quantity = quantity;
-            TotalPrice = totalPrice;
-        }
-    
+        public double Brutto() => Math.Round(Amount(), 2);
+        public double Netto() => Vat == null ? Brutto() : Math.Round(Amount() * (1 - Vat.Value), 2);
     }
 }
