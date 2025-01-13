@@ -13,7 +13,7 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Content="MainPage-PlaceHolder" FontWeight="Bold" FontSize="48" HorizontalAlignment="Center"/>
+        <Label Grid.Row="0" Content="Fakturomat" FontWeight="Bold" FontSize="48" HorizontalAlignment="Center"/>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

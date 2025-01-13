@@ -31,7 +31,7 @@ namespace ArchOp.ViewModels
 
 
         private RelayCommand backCommand;
-        public ICommand BackCommand => registerCommand ??= new RelayCommand(BackButton);
+        public ICommand BackCommand => backCommand ??= new RelayCommand(BackButton);
 
 
 

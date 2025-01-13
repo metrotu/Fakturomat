@@ -6,8 +6,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArchOp" 
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-        <ContentControl Content="{Binding CurrentViewModel}">
+        Title="MainWindow"
+        WindowStyle="SingleBorderWindow"
+        WindowState="Maximized">
+    <ContentControl Content="{Binding CurrentViewModel}">
         <ContentControl.Resources>
             <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
                 <local:DashboardPage/>

@@ -15,7 +15,7 @@
             <RowDefinition Height="0*" />
         </Grid.RowDefinitions>
         <!-- Title TextBlock -->
-        <TextBlock Text="Fakturomat Register" FontWeight="Bold" FontSize="48" TextAlignment="Center"
+        <TextBlock Text="Register" FontWeight="Bold" FontSize="48" TextAlignment="Center"
                    HorizontalAlignment="Center" VerticalAlignment="Center" Height="63" Width="500" />
 
         <!-- Centered Form -->

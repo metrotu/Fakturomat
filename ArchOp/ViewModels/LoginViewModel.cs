@@ -47,10 +47,10 @@ namespace ArchOp.ViewModels
             try
             {
                 var session = await App.SupabaseClient.Auth.SignIn(Email, password);
-                if (session != null && session.User != null)
+                /*if (session != null && session.User != null)
                 {
                     MessageBox.Show("LoginSucc");
-                }
+                }*/
             }
             catch (Exception _)
             {
