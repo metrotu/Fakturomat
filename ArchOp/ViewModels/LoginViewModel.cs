@@ -1,9 +1,7 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 
 namespace ArchOp.ViewModels
 {
@@ -12,7 +10,7 @@ namespace ArchOp.ViewModels
         private readonly NavStore navStore;
         public string Email { get; set; }
         private string password;
-        public string Password { get=>password; set=>password = value; }
+        public string Password { get => password; set => password = value; }
 
         public bool IsLoginButtonEnabled { get; set; }
 
@@ -24,7 +22,7 @@ namespace ArchOp.ViewModels
         private RelayCommand backButtonCommand;
         public ICommand BackButtonCommand => backButtonCommand ??= new RelayCommand(BackButton);
 
-        public LoginViewModel(NavStore navStore) 
+        public LoginViewModel(NavStore navStore)
         {
             IsLoginButtonEnabled = true;
             this.navStore = navStore;
@@ -38,7 +36,7 @@ namespace ArchOp.ViewModels
             if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Please enter both username and password.", "Login Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
-                
+
                 IsLoginButtonEnabled = true;
                 OnPropertyChanged(nameof(IsLoginButtonEnabled));
 
@@ -64,7 +62,7 @@ namespace ArchOp.ViewModels
             OnPropertyChanged(nameof(IsLoginButtonEnabled));
 
             return true;
-        
+
         }
 
 

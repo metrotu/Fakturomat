@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 namespace ArchOp.ViewModels
 {
@@ -24,7 +19,7 @@ namespace ArchOp.ViewModels
 
         private void ExecuteNavToRegister()
         {
-            navStore.CurrentViewModel = new RegisterViewModel(navStore);   
+            navStore.CurrentViewModel = new RegisterViewModel(navStore);
         }
         private void ExecuteNavToLogin()
         {

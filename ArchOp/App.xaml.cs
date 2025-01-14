@@ -1,16 +1,13 @@
-﻿using ArchOp.ViewModels;
+﻿using System.Windows;
+using ArchOp.ViewModels;
 using Supabase;
-using System.Configuration;
-using System.Data;
-using System.Windows;
-using static Supabase.Gotrue.Constants;
 
 namespace ArchOp
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    
+
     public partial class App : Application
     {
         public static Client SupabaseClient { get; private set; }
@@ -45,8 +42,8 @@ namespace ArchOp
 
 
         }
-        
-       
+
+
     }
 
 }

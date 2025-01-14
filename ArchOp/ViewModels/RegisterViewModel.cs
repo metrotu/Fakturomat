@@ -1,15 +1,8 @@
-﻿using ArchOp.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows;
-using CommunityToolkit.Mvvm.Input;
+﻿using System.Windows;
 using System.Windows.Input;
-using iText.Layout.Properties;
 using System.Windows.Media;
+using ArchOp.Utils;
+using CommunityToolkit.Mvvm.Input;
 
 namespace ArchOp.ViewModels
 {
@@ -21,10 +14,10 @@ namespace ArchOp.ViewModels
         public Brush Color3 { get; set; }
         public string Email { get; set; }
         private string password;
-        public string Password { get=>password; set=>password = value; }
-        
+        public string Password { get => password; set => password = value; }
+
         private string rePass;
-        public string RePass { get=>rePass; set=>rePass = value;}
+        public string RePass { get => rePass; set => rePass = value; }
 
         private RelayCommand registerCommand;
         public ICommand RegisterCommand => registerCommand ??= new RelayCommand(RegisterButton);
@@ -35,7 +28,7 @@ namespace ArchOp.ViewModels
 
 
 
-        public RegisterViewModel(NavStore navStore) 
+        public RegisterViewModel(NavStore navStore)
         {
             this.navStore = navStore;
         }
@@ -77,7 +70,8 @@ namespace ArchOp.ViewModels
                 sum += 5;
 
             }
-            if (sum > 0) {
+            if (sum > 0)
+            {
                 string s = "";
                 massage.ForEach(x => s += x);
                 MessageBox.Show(s, "Registration Failed", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -122,7 +116,7 @@ namespace ArchOp.ViewModels
                 //nav to dashboard upon registration submition
                 navStore.CurrentViewModel = new DashboardViewModel(navStore);
             }
-            
+
         }
 
         private async void BackButton()

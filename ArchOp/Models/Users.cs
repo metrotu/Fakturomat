@@ -22,6 +22,6 @@ namespace ArchOp.Models
         public string? UserAddedCompaniesId { get; set; }
 
 
- 
+
     }
 }

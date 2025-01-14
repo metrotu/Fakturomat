@@ -7,7 +7,7 @@ namespace ArchOp.Models
     internal class Company : BaseModel
     {
         [PrimaryKey("CompanyId")]
-        public int CompanyId {  get; set; }
+        public int CompanyId { get; set; }
         [Column("CompanyName")]
         public string CompanyName { get; set; }
         [Column("CompanyAddress")]

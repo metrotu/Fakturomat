@@ -1,17 +1,14 @@
-﻿using ArchOp.Models;
+﻿using System.Collections.ObjectModel;
+using System.Reactive.Linq;
+using System.Windows.Input;
+using ArchOp.Models;
+using CommunityToolkit.Mvvm.Input;
 using iText.IO.Source;
 using iText.Kernel.Pdf;
 using iText.Layout;
+using iText.Layout.Borders;
 using iText.Layout.Element;
 using iText.Layout.Properties;
-using iText.Layout.Borders;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Collections.ObjectModel;
-using System.Reactive.Linq;
-using CommunityToolkit.Mvvm.Input;
-using System.Windows.Input;
-using System.Security.Policy;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ArchOp.ViewModels
@@ -28,13 +25,13 @@ namespace ArchOp.ViewModels
         private double quantity;
         private double price;
 
-        public string Name {  get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public string Quantity { get; set; }
         public string Price { get; set; }
         public double TotalPrice { get => Convert.ToDouble(Quantity) * Convert.ToDouble(Price); }
 
-        private string[] availableVat = ["23%", "8%", "5%","0%", "Exempt"];
+        private string[] availableVat = ["23%", "8%", "5%", "0%", "Exempt"];
         public string[] AvailableVat { get => availableVat; }
         private double? selectedVat;
         public string SelectedVat
@@ -48,7 +45,7 @@ namespace ArchOp.ViewModels
                 }
                 else
                 {
-                    selectedVat = Convert.ToDouble(value.TrimEnd('%'))/100.0;
+                    selectedVat = Convert.ToDouble(value.TrimEnd('%')) / 100.0;
                 }
             }
         }
@@ -89,12 +86,12 @@ namespace ArchOp.ViewModels
 
             IsCreateInvoiceEnabled = false;
             OnPropertyChanged(nameof(IsCreateInvoiceEnabled));
-            
+
             int invoiceId;
             var invoiceUserId = await DBRequests.GetInvoiceUserId();
             string pdfPath = $"{invoiceId = await DBRequests.GetNewInvoiceId()}_{InvoiceDate.Year}.pdf";
             System.Windows.MessageBox.Show("Invoice is being made.");
-            
+
             var pdfData = await CreatePDF(invoiceId, invoiceUserId);
             //id_rok.pdf
             /*
@@ -113,7 +110,7 @@ namespace ArchOp.ViewModels
 
 
             System.Windows.MessageBox.Show("Invoice has been created.");
-            
+
             IsCreateInvoiceEnabled = true;
             OnPropertyChanged(nameof(IsCreateInvoiceEnabled));
 
@@ -167,7 +164,7 @@ namespace ArchOp.ViewModels
             document.Add(detailsTable);
 
             // Adding the item table
-            Table itemTable = new Table(new float[]  {3, 6, 2, 2, 2, 2, 2}).UseAllAvailableWidth().SetMarginTop(20);
+            Table itemTable = new Table(new float[] { 3, 6, 2, 2, 2, 2, 2 }).UseAllAvailableWidth().SetMarginTop(20);
             itemTable.AddHeaderCell("Item");
             itemTable.AddHeaderCell("Description");
             itemTable.AddHeaderCell("Unit Price");
@@ -211,7 +208,7 @@ namespace ArchOp.ViewModels
             summaryTable.AddCell(new Cell().Add(new Paragraph("0.00").SetTextAlignment(TextAlignment.RIGHT)).SetBorder(Border.NO_BORDER));
 
             summaryTable.AddCell(new Cell().Add(new Paragraph("VAT:")).SetBorder(Border.NO_BORDER));
-            summaryTable.AddCell(new Cell().Add(new Paragraph($"{brutto-netto}").SetTextAlignment(TextAlignment.RIGHT)).SetBorder(Border.NO_BORDER));
+            summaryTable.AddCell(new Cell().Add(new Paragraph($"{brutto - netto}").SetTextAlignment(TextAlignment.RIGHT)).SetBorder(Border.NO_BORDER));
 
 
 
@@ -262,11 +259,11 @@ namespace ArchOp.ViewModels
 
         public async Task LoadOwnCompanyAsync()
         {
-            
+
             OwnCompany = await DBRequests.GetOwnCompany();
             // Notify the UI about the property change.
             OnPropertyChanged(nameof(OwnCompany));
-            
+
         }
 
         private async void CreateInvoiceButton()

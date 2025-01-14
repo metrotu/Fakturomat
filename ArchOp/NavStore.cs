@@ -22,7 +22,7 @@ namespace ArchOp
         // Store the MainWindowViewModel instance
         public static MainWindowViewModel MainWindowViewModel { get; set; }
 
-       
+
         private void OnCurrentViewModelChanged()
         {
             CurrentViewModelChanged?.Invoke();

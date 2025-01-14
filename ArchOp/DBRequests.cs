@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using ArchOp.Models;
-using iText.Kernel.Pdf;
+﻿using ArchOp.Models;
 
 namespace ArchOp
 {
@@ -37,9 +30,9 @@ namespace ArchOp
 
             if (h == null || h.UserAddedCompaniesId == null || h.UserAddedCompaniesId.Length == 0)
                 return null;
-        
+
             return h.UserAddedCompaniesId.Split(',').Select(x => Convert.ToInt32(x));
-        
+
         }
 
 
@@ -92,7 +85,7 @@ namespace ArchOp
         {
             await App.SupabaseClient
                 .From<Company>()
-                .Insert(new Company { CompanyName = companyName, CompanyAddress = companyAddress});
+                .Insert(new Company { CompanyName = companyName, CompanyAddress = companyAddress });
             return await App.SupabaseClient
                 .From<Company>()
                 .Select("CompanyId")
@@ -122,7 +115,7 @@ namespace ArchOp
                 .Select("SupabaseUserId, UserAddedCompaniesId")
                 .Where(x => x.SupabaseUserId == App.SupabaseClient.Auth.CurrentUser.Id)
                 .Single();
-            
+
             if (user == null)
                 return;
 
@@ -158,7 +151,7 @@ namespace ArchOp
         {
             return await App.SupabaseClient
                 .From<Company>()
-                .Select("CompanyName, CompanyAddress") 
+                .Select("CompanyName, CompanyAddress")
                 .Where(x => x.CompanyId == companyId)
                 .Single();
         }
@@ -232,7 +225,7 @@ namespace ArchOp
             {
                 return 1;
             }
-            return latestInvoice.InvoiceUserId.Value+1;
+            return latestInvoice.InvoiceUserId.Value + 1;
 
         }
 

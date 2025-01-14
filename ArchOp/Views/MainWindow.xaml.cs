@@ -1,6 +1,4 @@
-﻿using ArchOp.ViewModels;
-using System;
-using System.Windows;
+﻿using System.Windows;
 
 
 namespace ArchOp
@@ -15,6 +13,6 @@ namespace ArchOp
             InitializeComponent();
         }
 
-        
+
     }
 }

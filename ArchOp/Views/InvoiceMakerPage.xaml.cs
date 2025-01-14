@@ -1,10 +1,5 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using ArchOp.Models;
+﻿using System.Windows.Controls;
 using ArchOp.ViewModels;
-using iText.IO.Source;
-using iText.Kernel.Pdf;
-using iText.Layout;
 
 
 namespace ArchOp
@@ -19,6 +14,6 @@ namespace ArchOp
             InitializeComponent();
             DataContext = new InvoiceMakerViewModel(navStore);
         }
-       
+
     }
 }

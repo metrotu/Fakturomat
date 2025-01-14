@@ -1,8 +1,5 @@
-﻿using Microsoft.Win32;
-using Supabase.Postgrest.Attributes;
+﻿using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
-using System.IO;
-using System.Windows;
 
 namespace ArchOp.Models
 {
@@ -18,7 +15,7 @@ namespace ArchOp.Models
         [Column("InvoiceUserId")]
         public int? InvoiceUserId { get; set; }
         [Column("InvoiceDisplayName")]
-        public string InvoiceDisplayName { get=> $"{InvoiceUserId} / {InvoiceYear}"; }
+        public string InvoiceDisplayName { get => $"{InvoiceUserId} / {InvoiceYear}"; }
 
     }
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ArchOp.Models
+﻿namespace ArchOp.Models
 {
     internal class Item(string name, string? description, double price, double quantity, double totalPrice, double? vat)
     {
@@ -14,10 +8,10 @@ namespace ArchOp.Models
         public double Quantity { get; set; } = quantity;
         public double TotalPrice { get; set; } = totalPrice;
         public double? Vat { get; set; } = vat == null ? 0 : vat.Value;
-        public double? DisplayVat { get=>vat; }
+        public double? DisplayVat { get => vat; }
         public double ItemBrutto { get => Brutto(); }
 
-        public double ItemNetto { get=> Netto(); }
+        public double ItemNetto { get => Netto(); }
 
         public double Amount() => Price * Quantity;
         public double Brutto() => Math.Round(Amount(), 2);

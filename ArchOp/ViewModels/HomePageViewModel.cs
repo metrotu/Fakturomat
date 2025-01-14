@@ -1,18 +1,13 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Input;
 
 namespace ArchOp.ViewModels
 {
     internal class HomePageViewModel : ViewModelBase
     {
         private readonly NavStore navStore;
-        
+
         public Page CurrentPage { get; set; }
 
         public ICommand NavToInvoiceMakerCommand { get; }
@@ -56,6 +51,6 @@ namespace ArchOp.ViewModels
             CurrentPage = new AddCompanyPage(navStore);
             OnPropertyChanged(nameof(CurrentPage));
         }
-       
+
     }
 }

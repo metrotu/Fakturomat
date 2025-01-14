@@ -1,6 +1,5 @@
-﻿using ArchOp.Models;
+﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
-using System.Windows.Input;
 
 namespace ArchOp.ViewModels
 {
@@ -12,7 +11,7 @@ namespace ArchOp.ViewModels
         public ICommand SetCompanyCommand => setCompanyCommand ??= new RelayCommand(SetCompanyButton);
 
         public string CompanyName { get; set; }
-        public string CompanyAddress {  get; set; }
+        public string CompanyAddress { get; set; }
         public SetCompanyViewModel(NavStore navStore)
         {
             this.navStore = navStore;
@@ -27,7 +26,7 @@ namespace ArchOp.ViewModels
                 System.Windows.MessageBox.Show("Company already set, unable to change contact the administrator");
                 return;
             }
-            await DBRequests.PairUserCompanyWithUser(CompanyName,CompanyAddress);
+            await DBRequests.PairUserCompanyWithUser(CompanyName, CompanyAddress);
         }
 
         private async void SetCompanyButton()

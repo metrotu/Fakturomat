@@ -1,10 +1,7 @@
-﻿using ArchOp.ViewModels;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Text.RegularExpressions;
-using ArchOp.Utils;
-using System.Drawing;
 using System.Windows.Media;
+using ArchOp.ViewModels;
 
 namespace ArchOp
 {
